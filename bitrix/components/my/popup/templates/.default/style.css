@@ -1,0 +1,53 @@
+.uni_popup_wrap{
+	position: relative;
+	max-width: 400px;
+	margin: 0 auto;
+	background-color: #FFF;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.uni_popup_picture{
+	width: 100%;
+	height: 175px;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-bottom: 30px;
+}
+.uni_popup_body{
+	padding: 0 30px 30px 30px;
+}
+.uni_popup_name {
+	font-size: 26px;
+	line-height: 30px;
+	color: #96BF31;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+.uni_popup_text{
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+	margin-bottom: 30px;
+}
+.uni_popup_btn{
+	text-align: center;
+}
+.uni_popup_btn__link{
+	display: inline-block;
+	background: #96BF31;
+	box-shadow: 0px 2px 2px #96BF31;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 13px;
+	line-height: 42px;
+	text-align: center;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	padding: 0 15px;
+	height: 42px;
+}
+.uni_popup_btn__link:hover{
+	color: #FFFFFF;
+}
