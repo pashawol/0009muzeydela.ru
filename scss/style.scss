@@ -381,7 +381,7 @@
 		border-radius: 3px;
 		@include mt;
 		display: inline-block;
-		padding: 2px;
+		padding: 2px rem(10);
 		margin-right: 10px;
 		&:hover{
 			background: rgba(150, 191, 49, 0.15);
