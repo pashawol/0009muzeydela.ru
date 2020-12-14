@@ -2,7 +2,7 @@
 $(document).ready(function () {
 	$('.custom-select-js').select2();
 	$(".theme-block__toggle").click(function () {
-		$("theme-block").toggleClass('active');
+		$(".theme-block").toggleClass('active');
 		$(this).toggleClass('active').next().slideToggle();
 	})
 });

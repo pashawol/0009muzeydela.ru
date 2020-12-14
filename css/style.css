@@ -80,8 +80,18 @@
   display: none;
 }
 
+@media (min-width: 992px) {
+  .select2-container--default .select2-selection--single .select2-selection__arrow {
+    right: 12px;
+  }
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: #000 transparent transparent transparent !important;
+  border-width: 4px 5px 0 5px !important;
+}
+
 .search-block {
-  margin-bottom: 30px;
+  margin-bottom: 8px;
 }
 @media (min-width: 992px) {
   .search-block--year {
@@ -95,6 +105,8 @@
   width: 100%;
   color: #C4C4C4;
   font-size: 15px;
+  line-height: 1.4;
+  padding-bottom: 1.125rem;
 }
 .search-block .form-control {
   border: 1px solid #96BF31;
@@ -103,7 +115,7 @@
 }
 @media (min-width: 992px) {
   .search-block .form-control {
-    padding: 6px 20px;
+    padding: 7px 20px;
   }
 }
 .search-block__input {
@@ -127,6 +139,7 @@
 
 .select2-container--default .select2-results > .select2-results__options {
   max-height: none;
+  padding-bottom: 20px;
 }
 
 .select2-container--default .select2-selection--single {
@@ -135,7 +148,7 @@
   padding: 6px 10px;
   display: block;
   border-radius: 2px 0 0 2px;
-  height: 39px;
+  height: auto;
 }
 @media (min-width: 992px) {
   .select2-container--default .select2-selection--single {
@@ -196,7 +209,7 @@
 
 .theme-block {
   border-radius: 2px;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 }
 .theme-block.active {
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
@@ -229,18 +242,25 @@
   opacity: 1;
 }
 .theme-block__toggle.active::before {
-  opacity: 0;
+  border: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #96BF31;
+  border-radius: 50%;
+  top: -0.625rem;
+  left: -0.625rem;
 }
 .theme-block__toggle::before {
   content: "";
   height: 0;
   width: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #96BF31;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #96BF31;
   margin-left: 10px;
   order: 2;
-  transition: all 0.36s;
+  position: relative;
+  top: -0.1875rem;
 }
 .theme-block__toggle::after {
   position: absolute;
@@ -297,6 +317,7 @@
 .theme-input {
   display: block;
   cursor: pointer;
+  margin-bottom: 0;
 }
 .theme-input__input {
   position: absolute;
@@ -306,7 +327,6 @@
   font-size: 18px;
   padding: 2px 8px;
   border: 1px solid transparent;
-  margin-bottom: 5px;
   display: block;
   transition: all 0.36s;
   border-radius: 3px;
@@ -327,7 +347,7 @@
   border-bottom: 1px solid #EFF1F5;
 }
 .catalog-block .select2-container--default {
-  max-width: 200px;
+  max-width: 180px;
 }
 .catalog-block .select2-container--default .select2-selection--single {
   border: none;
@@ -338,7 +358,7 @@
   padding-bottom: 40px;
 }
 .catalog-block__head {
-  margin-bottom: 1.875rem;
+  margin-bottom: 3.125rem;
 }
 .catalog-block table {
   width: 100%;
@@ -372,6 +392,10 @@
 .catalog-block td {
     padding-top: 10px;
   }
+  .catalog-block th:first-child,
+.catalog-block td:first-child {
+    max-width: 250px;
+  }
   .catalog-block th:nth-last-child(1), .catalog-block th:nth-last-child(2),
 .catalog-block td:nth-last-child(1),
 .catalog-block td:nth-last-child(2) {
@@ -386,10 +410,11 @@
   border-radius: 6px;
   transition: all 0.36s;
   display: inline-block;
-  padding: 1px 0.625rem;
-  margin-right: 10px;
+  padding: 1px 0.3125rem;
+  margin-right: 5px;
+  line-height: 1.4;
 }
-.catalog-block__label.active, .catalog-block__label:hover {
+.catalog-block__label.active {
   background: rgba(150, 191, 49, 0.15);
   color: #96BF31;
 }
@@ -407,19 +432,35 @@
 .catalog-block tr {
     display: block;
   }
+  .catalog-block tr {
+    padding-bottom: 30px;
+  }
+  .catalog-block tr:not(:last-child) {
+    border-bottom: 1px solid #EFF1F5;
+    margin-bottom: 20px;
+  }
   .catalog-block td {
     display: flex;
+    padding-bottom: 0;
+    align-items: center;
   }
   .catalog-block td::before {
     content: attr(data-title);
     font-size: 11px;
-    line-height: 16px;
+    line-height: 1.4545454545;
     /* identical to box height */
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #C4C4C4;
     width: 110px;
     margin-right: 20px;
+  }
+  .catalog-block td:first-child {
+    padding-bottom: 10px;
+    align-items: flex-start;
+  }
+  .catalog-block td:first-child::before {
+    padding-top: 1rem;
   }
 }
 @media (max-width: 991.98px) and (max-width: 575.98px) {
@@ -453,4 +494,17 @@
 }
 .catalog-block-pagination__item--current {
   color: #000000;
+}
+
+.screen {
+  pointer-events: none;
+  background-position: top center;
+  left: 0;
+  position: absolute;
+  height: 4000px;
+  width: 100%;
+  top: -1017px;
+  z-index: 100;
+  opacity: 0.7;
+  opacity: 0;
 }

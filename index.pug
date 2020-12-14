@@ -33,7 +33,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 		link(rel='stylesheet' href='css/style.css')
 		
 	body.regionality_n.mheader-v1.footer-v1.fill_bg_.title-v1.with_phones.wheader_v3.in_index
- 
+		.screen(style="background-image: url(screen.jpg);")
 		// 'end_frame_cache_options-block'
 		.cd-modal-bg
 		.mega_fixed_menu
@@ -1015,6 +1015,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 							.banners-big.front
 		// start
 		.lib-block.maxwidth-theme
+			
 			.container
 				.row
 					.col-md-3
@@ -1030,7 +1031,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 												option По автору
 												option По названию
 												option По издательству
-										input.search-block__input.form-control(type='text ' placeholder="поле")
+										input.search-block__input.form-control(type='text ')
 							.coll-sm-auto
 								.search-block.search-block--year
 									.search-block__title Год печати
@@ -1039,7 +1040,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 											select.search-block__select.form-control.custom-select-js
 												option Год
 												option Период
-										input.search-block__input.form-control(type='text ' placeholder="поле")
+										input.search-block__input.form-control(type='text ')
 						.theme-block
 							.theme-block__toggle 
 								| Темы
@@ -1059,16 +1060,22 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 											+item('Россия')
 											+item('ФЭЛ ')
 											+item('Персоналии ')
+											block
+										+li('а')
 											+item('Россия')
 											+item('Общество')
 											+item('Предпринимательство')
 											+item('Персоналии')
 											+item('Россия')
 											+item('ФЭЛ ')
-										+li('а')
 										+li('б')
 										+li('в')
+											+item('Россия')
+											+item('Общество')
+											+item('Предпринимательство')
+											+item('Персоналии') 
 										+li('г')
+											+item('Россия') 
 										+li('д')
 										+li('е')
 										+li('ж')
@@ -1104,9 +1111,9 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 														div
 															.catalog-block__title: a(href="#")  Деревянные кони
 															.catalog-block__labels
-																a.catalog-block__label.active(href="#") Предпренимательство
-																a.catalog-block__label(href="#") Россия
-																a.catalog-block__label(href="#") Общество
+																.catalog-block__label.active Предпренимательство
+																.catalog-block__label Россия
+																.catalog-block__label Общество
 												td(data-title="Автор") Абрамов Ф.
 												td(data-title="Издательство") М. «Современник»
 												td(data-title="Год печати") 1978
