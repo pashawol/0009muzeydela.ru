@@ -1104,7 +1104,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 														div
 															.catalog-block__title: a(href="#")  Деревянные кони
 															.catalog-block__labels
-																a.catalog-block__label(href="#") Предпренимательство
+																a.catalog-block__label.active(href="#") Предпренимательство
 																a.catalog-block__label(href="#") Россия
 																a.catalog-block__label(href="#") Общество
 												td(data-title="Автор") Абрамов Ф.
@@ -1113,13 +1113,18 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 												td(data-title="кол-во стр.") 430
 								button.btn.btn-outline-primary(type="button") загрузить ещё
 								.catalog-block-pagination
-									a.catalog-block-pagination__item(href="#") 1
-									a.catalog-block-pagination__item.catalog-block-pagination__item--current(href="#") 2 
-									a.catalog-block-pagination__item(href="#") 3
-									a.catalog-block-pagination__item(href="#") 4
-									a.catalog-block-pagination__item(href="#") 5
-									a.catalog-block-pagination__item(href="#") ...
-									a.catalog-block-pagination__item(href="#") 77
+									a.catalog-block-pagination__item(href="#") 
+										img(src="img/arrow-left.svg", alt="")
+									div
+										a.catalog-block-pagination__item(href="#") 1
+										a.catalog-block-pagination__item.catalog-block-pagination__item--current(href="#") 2 
+										a.catalog-block-pagination__item(href="#") 3
+										a.catalog-block-pagination__item(href="#") 4
+										a.catalog-block-pagination__item(href="#") 5
+										a.catalog-block-pagination__item(href="#") ...
+										a.catalog-block-pagination__item(href="#") 77
+									a.catalog-block-pagination__item(href="#") 
+										img(src="img/arrow-right.svg", alt="")
 		// end
 
 		.footer_slogan
