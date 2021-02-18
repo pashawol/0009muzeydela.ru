@@ -25,7 +25,7 @@
   }
 }
 
-// обсалютное центрирование
+// aбсолютное центрирование
 
 @mixin a-cent($xy:xy) {
   position: absolute;
@@ -51,6 +51,7 @@
     margin-bottom: auto;
   }
 }
+
 @mixin a-cent1($xy:xy) {
   @if $xy==xy {
     position: absolute;
@@ -76,7 +77,6 @@
   }
 }
 
-
 @mixin roww($a) {
   --bs-gutter-x: #{$a};
 
@@ -93,8 +93,7 @@
   margin-left: auto;
   margin-right: auto;
   max-width: $w;
-}
- 
+} 
 
 @mixin bgs($w: center, $h: center) {
   background-size: cover;
@@ -120,8 +119,6 @@
     overflow: hidden;
   }
 }
-
-
 
 @mixin bgsn($img, $w: center, $h: center) {
   background-size: cover;
@@ -151,11 +148,11 @@
   }
 }
 
-// масштвбирование блока пропорционально
+// масштабирование блока пропорционально
 @mixin block($w: 1, $h: 1) {
   display: block;
   position: relative; 
-  --ratio: calc($h/$w);
+  --ratio: calc(#{$h} / #{$w});
   &::before { 
     content: '';
     position: relative;
@@ -183,7 +180,6 @@
     @content;
   }
 }
-
 
 //tear container
 @mixin tear($width) {

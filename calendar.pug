@@ -30,6 +30,7 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 		link(rel='stylesheet' href='bitrix/templates/aspro-priority/add_onc0bd.css?v=710')
 
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+		link(rel='stylesheet' href='bitrix/templates/aspro-priority/vendor/slick-1.8.1/slick/slick.css')
 		link(rel='stylesheet' href='css/style.css')
 		
 	body.regionality_n.mheader-v1.footer-v1.fill_bg_.title-v1.with_phones.wheader_v3.in_index
@@ -1013,128 +1014,87 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 					.drag-block.container(data-class='BIG_BANNER_INDEX_drag' data-order='1')
 						.row.margin0
 							.banners-big.front
-		// start
-		.lib-block.maxwidth-theme
-			
-			.container
+		
+		// description start
+		section.description.section
+			.maxwidth-theme
 				.row
-					.col-md-3
 					.col-md-9
-						.roww
-							.coll
-								.search-block
-									.search-block__title Поиск
-									.search-block__group
-										.search-block__select-wrap.search-block__select-wrap--where
-											select.search-block__select.search-block__select--where.form-control.custom-select-js
-												option Везде
-												option По автору
-												option По названию
-												option По издательству
-										input.search-block__input.form-control(type='text ')
-							.coll-sm-auto
-								.search-block.search-block--year
-									.search-block__title Год печати
-									.search-block__group
-										.search-block__select-wrap
-											select.search-block__select.form-control.custom-select-js
-												option Год
-												option Период
-										input.search-block__input.form-control(type='text ')
-						.theme-block
-							.theme-block__toggle 
-								.theme-block__toggle-inner
-									| Темы
-									span.checked
-							.theme-block__dropdown
-								.theme-block__dropdown-inner
-									ul
-										mixin li(t, ...items) 
-											li.title= t 
-											mixin item(i)
-												li 
-													label.theme-input
-														input.theme-input__input(type="checkbox")
-														span.theme-input__text= i
-											+item('Общество')
-											+item('Предпринимательство')
-											+item('Персоналии')
-											+item('Россия')
-											+item('ФЭЛ ')
-											+item('Персоналии ')
-											block
-										+li('а')
-											+item('Россия')
-											+item('Общество')
-											+item('Предпринимательство')
-											+item('Персоналии')
-											+item('Россия')
-											+item('ФЭЛ ')
-										+li('б')
-										+li('в')
-											+item('Россия')
-											+item('Общество')
-											+item('Предпринимательство')
-											+item('Персоналии') 
-										+li('г')
-											+item('Россия') 
-										+li('д')
-										+li('е')
-										+li('ж')
-										+li('з')
-								.theme-block__dropdown-footer Сбросить
-						.catalog-block
-							.catalog-block__head
-								.catalog-block__select-wrap
-									select.form-control.form-control--filter.custom-select-js
-										option По умолчанию
-										option По дате добавления
-										option Сначала старые издания
-										option Сначала новые издания
-										option По авторау (А-Я)
-										option По названию (А-Я) 
-										option По издательству (А-Я) 
-							.catalog-block__body
-								table
-									thead
-										tr
-											th Название
-											th Автор
-											th Издательство
-											th Год печати
-											th кол-во стр.
-									tbody
-										- for (var x = 0; x < 4; x++)
-											tr
-												td(data-title="Название")
-													.catalog-block__caption
-														a.catalog-block__img-wrap(href="#")
-															img(src="img/book.jpg", alt="")
-														div
-															.catalog-block__title: a(href="#")  Деревянные кони
-															.catalog-block__labels
-																.catalog-block__label.active Предпренимательство
-																.catalog-block__label Россия
-																.catalog-block__label Общество
-												td(data-title="Автор") Абрамов Ф.
-												td(data-title="Издательство") М. «Современник»
-												td(data-title="Год печати") 1978
-												td(data-title="кол-во стр.") 430
-								button.btn.btn-outline-primary(type="button") загрузить ещё
-								.catalog-block-pagination
-									a.catalog-block-pagination__item(href="#") 
-										img(src="img/arrow-left.svg", alt="")
-									div
-										a.catalog-block-pagination__item(href="#") 1
-										a.catalog-block-pagination__item.catalog-block-pagination__item--current(href="#") 2 
-										a.catalog-block-pagination__item(href="#") 3
-										a.catalog-block-pagination__item(href="#") 4
-										a.catalog-block-pagination__item(href="#") 5
-										a.catalog-block-pagination__item(href="#") ...
-										a.catalog-block-pagination__item(href="#") 77
-									a.catalog-block-pagination__item(href="#") 
-										img(src="img/arrow-right.svg", alt="")
-		// end
+						h3.description__title Описание
+						p.description__content Календарь на&nbsp;2021 год знакомит с&nbsp;предпринимательским наследием 12&nbsp;городов России и&nbsp;рекомендует интересные места для посещения во&nbsp;время путешествий и&nbsp;деловых поездок. На&nbsp;каждой странице в&nbsp;своих видеороликах , специально отснятых для этого календаря, вас приветствуют региональные музеи и&nbsp;отделения &laquo;ОПОРЫ РОССИИ&raquo;.
+						p.description__content Благодарим наших партнеров за&nbsp;активное участие в&nbsp;создании календаря!
+						p.description__content Пусть 2021 год станет годом больших возможностей, активной созидательной деятельности и&nbsp;воплощения самых грандиозных планов! Желаем вам крепкого здоровья и&nbsp;благополучия в&nbsp;Новом году!
+		// description end
+
+		// pages start
+		section.pages.section
+			.maxwidth-theme
+				.row
+					.col-md-9
+						h3.pages__title Страницы календаря на&nbsp;2021 год
+						.row
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-1.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-2.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-3.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-4.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-5.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-6.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-7.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-8.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-5.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-6.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-7.jpg", alt="")
+							.col-lg-3.col-md-4.col-sm-4.col-xs-6
+								a.pages__item(href="#")
+									img(src="img/pages-8.jpg", alt="")
+		// pages end
+
+		// past-years start
+		section.past-years.section
+			.maxwidth-theme
+				.row
+					.col-md-9
+						h3.past-years__title Календари за&nbsp;прошлые годы
+						.past-years__items.past-years__items--js
+							div.past-years__slide: .past-years__item
+								a.past-years__link(href="#")
+									img.past-years__img(src='img/past-1.jpg')
+								p.past-years__caption 2020 год
+							div.past-years__slide: .past-years__item
+								a.past-years__link(href="#")
+									img.past-years__img(src='img/past-1.jpg')
+								p.past-years__caption 2019 год
+							div.past-years__slide: .past-years__item
+								a.past-years__link(href="#")
+									img.past-years__img(src='img/past-1.jpg')
+								p.past-years__caption 2018 год
+							div.past-years__slide: .past-years__item
+								a.past-years__link(href="#")
+									img.past-years__img(src='img/past-1.jpg')
+								p.past-years__caption 2017 год
+		// past-years end
 
 		.footer_slogan
 			span.footer_slogan__text
@@ -1331,4 +1291,5 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='ru')
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+	<script src="bitrix/templates/aspro-priority/vendor/slick-1.8.1/slick/slick.minb0fa.js"></script>
 	<script src="js/custom.js"></script>
