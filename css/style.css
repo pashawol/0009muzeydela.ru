@@ -827,7 +827,7 @@
 }
 @media (max-width: 600px) {
   .objects__header {
-    padding: 15px 20px 15px 0;
+    padding: 15px 25px 15px 10px;
   }
 }
 .objects__header h6 {
@@ -841,7 +841,7 @@
 @media (max-width: 600px) {
   .objects__header h6 {
     padding-left: 10px;
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 .objects__header::before {
@@ -860,7 +860,7 @@
 }
 @media (max-width: 600px) {
   .objects__header::before {
-    right: 5px;
+    right: 7px;
   }
 }
 .objects__head-img {
