@@ -805,11 +805,18 @@
 .objects__item {
   transition: all 0.36s;
   cursor: pointer;
+  border: 1px solid #F1F2F6;
 }
 .objects__item.active .objects__header:before {
   background-image: url(../img/shevron-up.svg);
   height: 8px;
   width: 16px;
+}
+.objects__item:not(.active):hover {
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+.objects__item:not(.active):hover h6 {
+  color: #96bf31;
 }
 .objects__header {
   display: flex;
