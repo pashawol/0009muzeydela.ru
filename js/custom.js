@@ -5,7 +5,7 @@ $(document).ready(function () {
 		$(".theme-block").toggleClass('active');
 		$(this).toggleClass('active').next().slideToggle();
 	})
-  $('.past-years__items--js').slick({
+	$('.past-years__items--js').slick({
 		dots: false,
 		infinite: false,
 		speed: 300,
@@ -36,22 +36,23 @@ $(document).ready(function () {
 			// 		slidesToScroll: 1
 			// 	}
 			// },
-			
+
 			// You can unslick at a given breakpoint now by adding:
 			// settings: "unslick"
 			// instead of a settings object
 		]
 	});
-	
+
 	let objItem = document.querySelectorAll(".objects__item--js");
-	if(objItem) {
-		objItem.forEach(function (el) {
+	let objItemToggle = document.querySelectorAll(".objects__header");
+	if (objItem) {
+		objItemToggle.forEach(function (el) {
 			el.addEventListener('click', function () {
-				let objItem = document.querySelectorAll('.objects__item--js');
+				let objItemToggle = document.querySelectorAll('.objects__header');
 				let self = this;
 
-				for (let item of objItem) {
-					let currContent = item.querySelector('.objects__content--js');
+				for (let item of objItemToggle) {
+					let currContent = item.nextElementSibling;
 
 					if (item === self) {
 						item.classList.toggle('active');

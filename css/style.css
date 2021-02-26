@@ -807,7 +807,7 @@
   cursor: pointer;
   border: 1px solid #F1F2F6;
 }
-.objects__item.active .objects__header:before {
+.objects__item .objects__header.active:before {
   background-image: url(../img/shevron-up.svg);
   height: 8px;
   width: 16px;
@@ -926,4 +926,8 @@
   .objects__img {
     margin-bottom: 15px;
   }
+}
+
+.op-05 {
+  opacity: 0.5 !important;
 }
