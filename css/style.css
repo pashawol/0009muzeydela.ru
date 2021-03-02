@@ -784,6 +784,8 @@
   max-width: 630px;
   padding-left: 35px;
   color: #333333;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 @media (max-width: 1031px) {
   .description2__text {
@@ -836,7 +838,7 @@
   cursor: pointer;
   border: 1px solid #f1f2f6;
 }
-.objects__item.active .objects__header:before {
+.objects__item .objects__header.active:before {
   background-image: url(../img/shevron-up.svg);
   height: 8px;
   width: 16px;
@@ -955,4 +957,8 @@
   .objects__img {
     margin-bottom: 15px;
   }
+}
+
+.op-05 {
+  opacity: 0.5 !important;
 }

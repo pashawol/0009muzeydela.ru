@@ -742,6 +742,8 @@
 		max-width: 630px;
 		padding-left: 35px;
 		color: #333333;
+		padding-top: 20px;
+		padding-bottom: 20px;
 		@media (max-width: 1031px) {
 			max-width: 460px;
 		}
@@ -785,8 +787,13 @@
 	&__item {
 		@include mt;
 		cursor: pointer;
+<<<<<<< HEAD
 		border: 1px solid #f1f2f6;
 		&.active .objects__header:before {
+=======
+		border: 1px solid #F1F2F6;
+		 .objects__header.active:before {
+>>>>>>> fe951d99d83b204e39f5e87c6f2f722fb710ee45
 			background-image: url(../img/shevron-up.svg);
 			height: 8px;
 			width: 16px;
@@ -886,3 +893,10 @@
 		}
 	}
 }
+<<<<<<< HEAD
+=======
+
+.op-05{
+	opacity: 0.5 !important;
+}
+>>>>>>> fe951d99d83b204e39f5e87c6f2f722fb710ee45
