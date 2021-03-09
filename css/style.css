@@ -836,7 +836,7 @@
 .objects__item {
   transition: all 0.36s;
   cursor: pointer;
-  border: 1px solid #f1f2f6;
+  border: 1px solid #F1F2F6;
 }
 .objects__item .objects__header.active:before {
   background-image: url(../img/shevron-up.svg);
@@ -897,13 +897,14 @@
 .objects__head-img {
   margin-top: auto;
   margin-bottom: auto;
-  max-width: 76px;
-  max-height: 50px;
+  width: 76px;
+  height: 50px;
+  object-fit: cover;
 }
 @media (max-width: 600px) {
   .objects__head-img {
-    max-width: 54px;
-    max-height: 35px;
+    width: 54px;
+    height: 35px;
   }
 }
 .objects__content {
@@ -929,10 +930,38 @@
 .objects__content:not(.active) {
   display: none;
 }
+.objects__images a {
+  display: block;
+  height: calc(100% - 25px);
+  margin-bottom: 25px;
+  display: block;
+  position: relative;
+  --ratio: calc(1 / 1.5285714286);
+}
+.objects__images a::before {
+  content: "";
+  position: relative;
+  height: 0;
+  display: block;
+  padding-bottom: calc(var(--ratio) * 100%);
+}
+.objects__images a img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
 .objects__images .row {
+  display: flex;
+  flex-wrap: wrap;
   --bs-gutter-x: 25px;
   margin-left: calc(-1 * var(--bs-gutter-x)/ 2);
   margin-right: calc(-1 * var(--bs-gutter-x)/ 2);
+}
+.objects__images .row::after, .objects__images .row::before {
+  display: none;
 }
 .objects__images .row > * {
   padding-left: calc(var(--bs-gutter-x)/2);
@@ -947,15 +976,6 @@
   .objects__images .row > * {
     padding-left: calc(var(--bs-gutter-x)/2);
     padding-right: calc(var(--bs-gutter-x)/2);
-  }
-}
-.objects__img {
-  width: 100%;
-  margin-bottom: 25px;
-}
-@media (max-width: 600px) {
-  .objects__img {
-    margin-bottom: 15px;
   }
 }
 

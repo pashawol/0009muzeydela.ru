@@ -787,13 +787,8 @@
 	&__item {
 		@include mt;
 		cursor: pointer;
-<<<<<<< HEAD
-		border: 1px solid #f1f2f6;
-		&.active .objects__header:before {
-=======
 		border: 1px solid #F1F2F6;
 		 .objects__header.active:before {
->>>>>>> fe951d99d83b204e39f5e87c6f2f722fb710ee45
 			background-image: url(../img/shevron-up.svg);
 			height: 8px;
 			width: 16px;
@@ -848,11 +843,12 @@
 	&__head-img {
 		margin-top: auto;
 		margin-bottom: auto;
-		max-width: 76px;
-		max-height: 50px;
+		width: 76px;
+		height: 50px;
+		object-fit: cover;
 		@media (max-width: 600px) {
-			max-width: 54px;
-			max-height: 35px;
+			width: 54px;
+			height: 35px;
 		}
 	}
 
@@ -877,7 +873,26 @@
 	}
 
 	&__images {
+		a {
+			display: block;
+			height: calc(100% - 25px);
+			margin-bottom: 25px;
+			@include block(214 / 140);
+			img {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				object-fit: cover;
+			}
+		}
 		.row {
+			display: flex;
+			flex-wrap: wrap;
+			&::after, &::before {
+				display: none;
+			}
 			@include roww(25px);
 			@media (max-width: 600px) {
 				@include roww(15px);
@@ -885,18 +900,8 @@
 		}
 	}
 
-	&__img {
-		width: 100%;
-		margin-bottom: 25px;
-		@media (max-width: 600px) {
-			margin-bottom: 15px;
-		}
-	}
 }
-<<<<<<< HEAD
-=======
 
 .op-05{
 	opacity: 0.5 !important;
 }
->>>>>>> fe951d99d83b204e39f5e87c6f2f722fb710ee45
