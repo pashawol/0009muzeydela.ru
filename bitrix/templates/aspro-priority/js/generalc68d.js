@@ -5215,7 +5215,7 @@ BX.addCustomEvent('onSlide', function(eventdata) {
 					$('.banners-big .item .video').css('opacity', 1);
 				}, 1200);
 
-				if(slider.closest('.big-gallery-block').length){
+				if(slider.closest('.').length){
 					setTimeout(function(){
 						slider.resize();
 					}, 100);

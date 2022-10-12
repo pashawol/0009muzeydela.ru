@@ -1,0 +1,23 @@
+mixin pagination()
+	.pagination_nav
+		.ajax_load_btn_pagination
+			span.more_text_ajax.btn.btn-default.btn-transparent.font_upper_md Загрузить еще
+		.wrap_pagination
+			ul.pagination
+				li.active
+					span 1
+				li
+					a(href='/novosti/?PAGEN_1=2') 2
+				li
+					a(href='/novosti/?PAGEN_1=3') 3
+				li
+					a(href='/novosti/?PAGEN_1=4') 4
+				li
+					a(href='/novosti/?PAGEN_1=5') 5
+				li.before
+					span ...
+				li
+					a(href='/novosti/?PAGEN_1=35') 35
+				li.next
+					a(href='/novosti/?PAGEN_1=2')
+						i.fa.fa-chevron-right

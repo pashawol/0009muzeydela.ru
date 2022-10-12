@@ -1,0 +1,422 @@
+mixin filter()
+	.projects_map__head__wrap.js_projects_map_menu_block
+		.projects_map__head__container
+			.projects_map__head__row
+				.projects_map__head__logo.js_projects_map_menu_link.js_projects_map_menu
+					img(src='map_files//projects_map__logo.svg' alt='')
+				.projects_map__head__col2
+					.row
+						.col-auto.col-cities.col-mob-100
+							button(class="btn btn-text projects_map__head-btn btn-default btn-transparent") Другие города
+						.col-auto.col-mob-100.col-place
+							button(class="btn projects_map__head-btn btn-default  active  btn-transparent")
+								svg(width='26' height='27' viewBox='0 0 26 27' fill='none' xmlns='http://www.w3.org/2000/svg').active
+									circle(cx='13.0688' cy='13.2542' r='10.2302' stroke='white')
+									path(d='M13.0688 0.0478821V5.82566' stroke='white')
+									path(d='M13.0688 20.2701V26.0479' stroke='white')
+									path(d='M26 13.2542L20.2222 13.2542' stroke='white')
+									path(d='M5.77774 13.2542L-3.67764e-05 13.2542' stroke='white')
+									circle(cx='13.0688' cy='13.2542' r='2.38889' stroke='white')
+								span Моё местоположение
+						
+						.col-auto.col-mob-100.col-btns.col-tab-btns
+							.btn-group
+								button(class="btn projects_map__head-btn btn-default  active  btn-transparent" data-filter="#tab-filter")
+									<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<g clip-path="url(#clip0_2066_722)">
+										<path d="M19.5069 0.922363H1.07031C0.638794 0.922363 0.289062 1.27209 0.289062 1.70361C0.289062 3.87921 1.22168 5.95624 2.84781 7.4017L6.26929 10.4428C6.86255 10.9701 7.20282 11.7279 7.20282 12.5218V20.1402C7.20282 20.7628 7.89862 21.136 8.41727 20.7901L13.0265 17.7174C13.2438 17.5725 13.3744 17.3286 13.3744 17.0674V12.5218C13.3744 11.7279 13.7147 10.9701 14.3079 10.4428L17.7293 7.4017C19.3554 5.95624 20.288 3.87921 20.288 1.70361C20.288 1.27209 19.9383 0.922363 19.5069 0.922363ZM16.6912 6.2338L13.2699 9.27503C12.3434 10.0987 11.8119 11.282 11.8119 12.5216V16.6493L8.76517 18.6804V12.5218C8.76517 11.282 8.23371 10.0987 7.30719 9.27503L3.88587 6.23395C2.78937 5.25907 2.08945 3.92331 1.90207 2.48471H18.675C18.4876 3.92331 17.7878 5.25907 16.6912 6.2338Z" fill="white"/>
+										</g>
+										<defs>
+										<clipPath id="clip0_2066_722">
+										<rect width="20" height="20" fill="white" transform="translate(0.25 0.922363)"/>
+										</clipPath>
+										</defs>
+										</svg>
+
+
+
+									span.btn-text Фильтр
+								button(class="btn projects_map__head-btn btn-default     btn-transparent" data-filter="#tab-search")
+									<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="8.35437" cy="8.92236" r="7" stroke="white" stroke-width="2"/>
+										<path d="M13.6876 14.2559L20.3543 20.9225" stroke="white" stroke-width="2"/>
+										</svg>
+									span.btn-text Поиск
+
+
+						.projects_map__head__col
+							.tabs-filter
+								.tabs-filter__content#tab-filter.active
+									.row 
+										.col-auto
+											form#js_map_smart_filter(name='_form' action='https://muzeydela.ru/map/' method='get')
+												.projects_map__filter
+													//- .projects_map__filter__icon
+													.projects_map__filter__row
+														.projects_map__select
+															.projects_map__select__inner
+																.projects_map__select__val
+																	span.js_map_filter_props_all.js_map_filter_props_697__all(data-prop-id='697') Все здания
+																	span.js_map_filter_props_697__selected(style='display: none;') Выбрано
+																	span.projects_map__select__val__count.js_map_filter_props_697__count(style='display: none;') 0
+															.projects_map__select__list
+																label.projects_map__select__item
+																	.projects_map__select__item__icon
+																	.projects_map__select__item__val
+																		| Все здания
+																	input.projects_map__select__item__box.js_map_filter_prop_697__allvalue(onchange="CJSMuzMapFilter.setAll('697', true);" type='checkbox' name='' value='')
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3138941249')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/3c3/3c3371a54db9160280cd61d21fa0c77d.svg');")
+																	.projects_map__select__item__val
+																		| Библиотеки
+																	input#arrMapFilter_697_3138941249.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3138941249' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_571547899')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/ab5/ab5c76ccfe42b730c8c8827caa73b7f6.svg');")
+																	.projects_map__select__item__val
+																		| Больницы
+																	input#arrMapFilter_697_571547899.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_571547899' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_1427509357')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/4de/4de5f8d9ed0f3fc9b85a532a259c00bb.svg');")
+																	.projects_map__select__item__val
+																		| Жильё
+																	input#arrMapFilter_697_1427509357.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_1427509357' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3413280206')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/7f5/7f5968ae5a90ae839735d72a1eab7f97.svg');")
+																	.projects_map__select__item__val
+																		| Музеи
+																	input#arrMapFilter_697_3413280206.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3413280206' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3161830744')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/c56/c56a7d53b77e1462ddc15c14477948b8.svg');")
+																	.projects_map__select__item__val
+																		| Ночлежные дома
+																	input#arrMapFilter_697_3161830744.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3161830744' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_628942050')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/2aa/2aaf4efb2552ec39b4d90021866e2f49.svg');")
+																	.projects_map__select__item__val
+																		| Образовательные учреждения
+																	input#arrMapFilter_697_628942050.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_628942050' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_1383847028')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/03a/03a9d0130907dc147fccf90d22cc85c0.svg');")
+																	.projects_map__select__item__val
+																		| Особняки
+																	input#arrMapFilter_697_1383847028.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_1383847028' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3267676645')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/bc2/bc22afa93a42d417ac9ec02e8912b5f2.svg');")
+																	.projects_map__select__item__val
+																		| Приюты
+																	input#arrMapFilter_697_3267676645.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3267676645' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3049519475')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/e30/e300f310af0d768b144644c7919d6a52.svg');")
+																	.projects_map__select__item__val
+																		| Столовые
+																	input#arrMapFilter_697_3049519475.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3049519475' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_697_3878818324')
+																	.projects_map__select__item__icon(style="background-image: url('/upload/iblock/72f/72f82854d0a97ffc9c95c16f33573aab.svg');")
+																	.projects_map__select__item__val
+																		| Театры
+																	input#arrMapFilter_697_3878818324.projects_map__select__item__box.js_map_filter_prop_697(type='checkbox' value='Y' name='arrMapFilter_697_3878818324' onclick="CJSMuzMapFilter.setAll('697', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+													.projects_map__filter__row
+														.projects_map__select
+															.projects_map__select__inner
+																.projects_map__select__val
+																	span.js_map_filter_props_all.js_map_filter_props_693__all(data-prop-id='693') Все благотворители
+																	span.js_map_filter_props_693__selected(style='display: none;') Выбрано
+																	span.projects_map__select__val__count.js_map_filter_props_693__count(style='display: none;') 0
+															.projects_map__select__list
+																label.projects_map__select__item
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Все здания
+																	input.projects_map__select__item__box.js_map_filter_prop_693__allvalue(onchange="CJSMuzMapFilter.setAll('693', true);" type='checkbox' name='' value='')
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_246812428')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Александр Алексеевич Бахрушин
+																	input#arrMapFilter_693_246812428.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_246812428' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2810482447')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Александр Сергеевич Капцов
+																	input#arrMapFilter_693_2810482447.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2810482447' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2511531405')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Александра Кирилловна Колесова
+																	input#arrMapFilter_693_2511531405.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2511531405' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2311695342')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Александра Ксенофонтовна Медведникова
+																	input#arrMapFilter_693_2311695342.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2311695342' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_427210367')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Алексей Александрович Бахрушин
+																	input#arrMapFilter_693_427210367.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_427210367' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2393141239')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Алексей Иванович Абрикосов
+																	input#arrMapFilter_693_2393141239.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2393141239' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3782432227')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Альфонс Леонович Шанявский
+																	input#arrMapFilter_693_3782432227.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3782432227' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1913307274')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Анна Павловна Тарасова
+																	input#arrMapFilter_693_1913307274.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1913307274' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2607375807')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Братья Солодовниковы
+																	input#arrMapFilter_693_2607375807.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2607375807' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_4042435431')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Варвара Алексеевна Морозова
+																	input#arrMapFilter_693_4042435431.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_4042435431' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2545901238')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Василий Алексеевич Бахрушин
+																	input#arrMapFilter_693_2545901238.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2545901238' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_591242005')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Василий Васильевич Варгин
+																	input#arrMapFilter_693_591242005.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_591242005' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_259863759')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Василий Федорович Аршинов
+																	input#arrMapFilter_693_259863759.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_259863759' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1928165543')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Великая Княгиня Елизавета Федоровна
+																	input#arrMapFilter_693_1928165543.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1928165543' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3889539641')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Викул Елисеевич Морозов
+																	input#arrMapFilter_693_3889539641.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3889539641' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_773891039')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Вишняков Алексей Семенович
+																	input#arrMapFilter_693_773891039.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_773891039' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_609249036')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Гавриил Гавриилович Солодовников
+																	input#arrMapFilter_693_609249036.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_609249036' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3673389898')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Герасим Иванович Хлудов
+																	input#arrMapFilter_693_3673389898.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3673389898' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1028347469')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Городское общественное управление
+																	input#arrMapFilter_693_1028347469.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1028347469' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_4278558907')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Иван Абрамович Морозов
+																	input#arrMapFilter_693_4278558907.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_4278558907' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2128411523')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Козьма Терентьевич Солдатенков
+																	input#arrMapFilter_693_2128411523.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2128411523' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3957598493')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Константин Васильевич Рукавишников
+																	input#arrMapFilter_693_3957598493.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3957598493' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3544528737')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Мария Федоровна Морозова
+																	input#arrMapFilter_693_3544528737.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3544528737' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1621757659')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Михаил Алексеевич Хлудов
+																	input#arrMapFilter_693_1621757659.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1621757659' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3343058666')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Михаил Леонтьевич Королев
+																	input#arrMapFilter_693_3343058666.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3343058666' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3224290035')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Московское купеческое общество
+																	input#arrMapFilter_693_3224290035.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3224290035' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_692938694')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Александрович Алексеев
+																	input#arrMapFilter_693_692938694.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_692938694' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2617549222')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Александрович Найденов
+																	input#arrMapFilter_693_2617549222.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2617549222' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1820079570')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Алексеевич Мазурин
+																	input#arrMapFilter_693_1820079570.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1820079570' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_471253341')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Васильевич Немиров-Колодкин
+																	input#arrMapFilter_693_471253341.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_471253341' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2632128907')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Васильевич Рукавишников
+																	input#arrMapFilter_693_2632128907.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2632128907' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_4167591074')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Петрович Румянцев
+																	input#arrMapFilter_693_4167591074.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_4167591074' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2188530942')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Николай Петрович Шереметев
+																	input#arrMapFilter_693_2188530942.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2188530942' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_1741146818')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Павел Григорьевич фон Дервиз
+																	input#arrMapFilter_693_1741146818.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_1741146818' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3382218456')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Павел Григорьевич Шелапутин
+																	input#arrMapFilter_693_3382218456.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3382218456' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3559453560')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Павел Михайлович Рябушинский
+																	input#arrMapFilter_693_3559453560.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3559453560' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_4182042444')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Павел Михайлович Третьяков
+																	input#arrMapFilter_693_4182042444.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_4182042444' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_2041659290')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Петр Алексеевич Бахрушин
+																	input#arrMapFilter_693_2041659290.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_2041659290' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_375784846')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Петр Иванович Щукин
+																	input#arrMapFilter_693_375784846.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_375784846' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3905231304')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Петр Ионович Губонин
+																	input#arrMapFilter_693_3905231304.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3905231304' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_42437672')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Прокофий Акинфиевич Демидов
+																	input#arrMapFilter_693_42437672.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_42437672' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_135327958')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Савва Иванович Мамонтов
+																	input#arrMapFilter_693_135327958.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_135327958' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3764377101')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Савва Тимофеевич Морозов
+																	input#arrMapFilter_693_3764377101.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3764377101' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3442721337')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Сергей Иванович Щукин
+																	input#arrMapFilter_693_3442721337.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3442721337' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3860763130')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Сергей Тимофеевич Морозов
+																	input#arrMapFilter_693_3860763130.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3860763130' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_4057868425')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Степан Павлович Рябушинский
+																	input#arrMapFilter_693_4057868425.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_4057868425' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_3286780427')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Флор Яковлевич Ермаков
+																	input#arrMapFilter_693_3286780427.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_3286780427' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+																label.projects_map__select__item(data-role='label_arrMapFilter_693_285983127')
+																	.projects_map__select__item__val.projects_map__select__item__val--noicons
+																		| Юрий Степанович Нечаев-Мальцов
+																	input#arrMapFilter_693_285983127.projects_map__select__item__box.js_map_filter_prop_693(type='checkbox' value='Y' name='arrMapFilter_693_285983127' onclick="CJSMuzMapFilter.setAll('693', false); smartFilter.click(this)")
+																	span.projects_map__select__item__box__b
+												input(type='hidden' name='set_filter' value='Показать')
+											script.
+												var smartFilter = new JCSmartFilter('/map/', 'VERTICAL', []);
+										.col-auto
+											.tabs-filter__btn(data-filter="#tab-search") Поиск
+								.tabs-filter__content#tab-search
+									.row
+										.col-auto
+											.projects_map__search
+												//- .projects_map__search__icon
+												form#js_muz_search_data.projects_map__search__form(action='https://muzeydela.ru/bitrix/components/my/map_filter/templates/.default/ajax.php' onsubmit='return false;' method='GET')
+													.select-wrap
+														select.custom-select-filter-js(name="")
+															option По названию
+															option По адресу
+															option По фамилии
+													input.projects_map__search__form__input.js_projects_map__search__form__input(placeholder='Поиск' onkeyup='CJSMuzMapFilter.searchData($(this));' type='text')
+													a.projects_map__search__form__clear.js_projects_map__search__form__clear(style='display:none;' href='https://muzeydela.ru/map/#' onclick='CJSMuzMapFilter.clear(); return false;')
+													button.projects_map__search__form__btn(type='submit') Искать
+													.projects_map__search__form__list.js_projects_map__search__form__list(style='display: none;')
+
+										.col-auto
+											.tabs-filter__btn(data-filter="#tab-filter") Фильтр
+						.col-auto.col-mob-100.col-btns.col-btns--view
+							.btn-group
+								button(class="btn projects_map__head-btn btn-default     btn-transparent")
+									svg(width='24' height='22' viewBox='0 0 24 22' fill='none' xmlns='http://www.w3.org/2000/svg')
+										path(d='M8.70845 3.38751L1.40881 1.04788V18.3831L8.70845 21.0479M8.70845 3.38751L15.7273 1.04788M8.70845 3.38751V21.0479M15.7273 1.04788L22.9993 3.38751V21.0479L15.7273 19.0844M15.7273 1.04788V19.0844M15.7273 19.0844L8.70845 21.0479' stroke='white')
+
+									span.btn-text Карта
+								button(class="btn projects_map__head-btn btn-default  active  btn-transparent")
+									svg(width='24' height='18' viewBox='0 0 24 18' fill='none' xmlns='http://www.w3.org/2000/svg')
+										path(d='M7.67761 1.04788H23.6776' stroke='white')
+										path(d='M7.67761 9.04788H23.6776' stroke='white')
+										path(d='M7.67761 17.0479H23.6776' stroke='white')
+										path(d='M0.677612 1.04788H4.67761' stroke='white')
+										path(d='M0.677612 9.04788H4.67761' stroke='white')
+										path(d='M0.677612 17.0479H4.67761' stroke='white')
+
+
+									span.btn-text Список

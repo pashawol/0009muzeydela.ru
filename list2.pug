@@ -1,0 +1,29 @@
+include _head.pug
+include blocks/_filter.pug
+include blocks/_footer.pug
+include blocks/_pagination.pug
++head
+	.body.hover_(style='min-height: 912px;')
+		.body_media
+		.main.banner-(role='main')
+			.container
+				.row
+					.col-md-12.col-sm-12.col-xs-12.content-md
+						.js_exclude_mobile_swipe
+						+filter()
+						.list-view-section
+							.tabs_type_filter__wrapper
+								.tabs_type_filter
+									a.tabs_type_filter__item.tabs_type_filter__item__selected(href='/posetitelyam/ceny-i-pravila-poseshcheniya/') Объекты
+									a.tabs_type_filter__item.shadow(href='/posetitelyam/ceny-i-pravila-poseshcheniya/rules.php') благотворители
+							.row.row--persons
+								- for (var x = 0; x < 4; x++)
+									.col-sm-6.col-xs-12
+										.list-view-section-item(href="#")
+											.projects_map_popup__info__item__val.projects_map_popup__info__item__val__philantrops
+												.projects_map_popup__info__item__pic(style="background-image: url('img/299a06327e6cbd1b768039863330ee01.jpg');")
+												.projects_map_popup__info__item__pic__text  Рябушинский Павел Павлович
+											p Хлудовы, московский купеческий род, крупные фабриканты в хлопчатобумажной промышленности. Основатель рода — Иван Иванович Хлудов, — бывший крестьянин, в начале XIX века занимался вместе с семьей кустарным производством...
+							+pagination
+	+footer()
+						

@@ -1,0 +1,2155 @@
+include _head.pug
+include blocks/_filter.pug
++head
+	.body.hover_(style='min-height: 912px;')
+		.body_media
+		.main.banner-(role='main')
+			.container
+				.row
+					.col-md-12.col-sm-12.col-xs-12.content-md
+						.js_exclude_mobile_swipe
+						+filter()
+						script.
+							var CJSMuzMapFilter = {
+							clear : function () {
+							$('.js_projects_map__search__form__input').val('');
+							$('.js_projects_map__search__form__list').hide();
+							$('.js_projects_map__search__form__list').html('');
+							$('.js_projects_map__search__form__clear').hide();
+							},
+							setAll : function (propId, isAll) {
+							if (isAll) {
+							$('.js_map_filter_prop_'+propId).removeAttr('disabled').removeAttr('checked').prop('checked', false);
+							} else {
+							$('.js_map_filter_prop_'+propId+'__allvalue').removeAttr('checked').prop('checked', false);
+							}
+							},
+							submitFilter : function () {
+							let obForm = $('#js_map_smart_filter');
+							$.ajax({
+							url : '/map/',
+							type : 'GET',
+							data : obForm.serialize()+'&setAjaxFilter=Y',
+							success : function (data) {
+							$('#js_map_list_result').html('').append(data);
+							}
+							});
+							},
+							calcSelectedItems : function () {
+							$('.js_map_filter_props_all').each(function () {
+							let propId = $(this).data('prop-id');
+							let countSelected = 0;
+							$('.js_map_filter_prop_'+propId).each(function () {
+							if ($(this).is(":checked")) {
+							countSelected++;
+							}
+							});
+							$('.js_map_filter_props_'+propId+'__count').html(countSelected);
+							if (countSelected > 0) {
+							$('.js_map_filter_props_'+propId+'__selected').show();
+							$('.js_map_filter_props_'+propId+'__count').show();
+							$('.js_map_filter_props_'+propId+'__all').hide();
+							} else {
+							$('.js_map_filter_props_'+propId+'__selected').hide();
+							$('.js_map_filter_props_'+propId+'__count').hide();
+							$('.js_map_filter_props_'+propId+'__all').show();
+							}
+							});
+							},
+							searchData : function (obInput) {
+							let obForm = $('#js_muz_search_data');
+							if (obInput.val().length <= 0) {
+							$('.js_projects_map__search__form__list').hide();
+							$('.js_projects_map__search__form__clear').hide();
+							} else {
+							$('.js_projects_map__search__form__clear').show();
+							}
+							$.ajax({
+							url : obForm.attr('action'),
+							type : 'POST',
+							data : 'ACTION=SEARCH&Q='+obInput.val(),
+							success : function (data) {
+							if (data.empty) {
+							$('.js_projects_map__search__form__list').hide();
+							$('.js_projects_map__search__form__list').html('');
+							} else {
+							$('.js_projects_map__search__form__list').show();
+							$('.js_projects_map__search__form__list').html('');
+							$('.js_projects_map__search__form__list').append(data.html);
+							}
+							}
+							});
+							}
+							};
+							$(document).ready(function () {
+							$('.js_projects_map_menu').click(function () {
+							$('.js_projects_map_menu_block').toggleClass('stage_open');
+							});
+							$('.projects_map__select__inner').click(function () {
+							//$('.projects_map__select__list.open-stage').not($(this)).removeClass('open-stage');
+							$(this).siblings('.projects_map__select__list').toggleClass('open-stage');
+							return false;
+							});
+							$('#js_map_list_result').click(function () {
+							$('.projects_map__select__list').removeClass('open-stage');
+							});
+							});
+						#js_map_list_result
+							script.
+								var CJSYandexMapHelper = {
+								openPopup : function(e) {
+								var target = e.get('target');
+								$.ajax({
+								url : '/bitrix/templates/aspro-priority/components/bitrix/news/projects-map/bitrix/news.list/.default/ajax.php?ELEMENT_ID='+target.options.get('customParamProjectId'),
+								type : 'POST',
+								success : function (data) {
+								$('.projects_map__mainblock').find('.projects_map_popup').remove();
+								$('.projects_map__mainblock').append(data);
+								$('.projects_map_popup').animate({
+								left : 0
+								}, 300);
+								}
+								});
+								},
+								closePopup : function () {
+								$('.projects_map_popup').animate({
+								left : -600+'px'
+								}, 300, function () {
+								$('.projects_map_popup').remove();
+								});
+								}
+								};
+								ymaps.ready(function () {
+								var projectsMapMainblock = new ymaps.Map("projects_map__mainblock", {
+								center: [55.76, 37.64],
+								zoom: 13,
+								controls: []
+								});
+								projectsMapMainblock.controls.add('zoomControl');
+								let myPlacemark1886 = new ymaps.Placemark([55.749271418343,37.63615044333], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Императорский Воспитательный дом</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1886,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1886.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1886.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1886.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1886);
+								let myPlacemark1884 = new ymaps.Placemark([55.744738794829,37.584571563974], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский исправительный приют для малолетних преступников</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1884,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1884.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1884.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1884.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1884);
+								let myPlacemark1881 = new ymaps.Placemark([55.737669346312,37.623249199926], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Марфо-Мариинская обитель милосердия</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1881,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1881.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1881.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1881.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1881);
+								let myPlacemark1879 = new ymaps.Placemark([55.725970164585,37.629364454523], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Богаделенный дом братьев Солодовниковых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1879,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1879.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1879.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1879.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1879);
+								let myPlacemark1878 = new ymaps.Placemark([55.809433590448,37.655045497057], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Сиротский приют имени братьев Петра, Александра и Василия Бахрушиных</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1878,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1878.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1878.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1878.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1878);
+								let myPlacemark1877 = new ymaps.Placemark([55.735771770694,37.623989307657], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Богадельня имени Н.В. и Д.А. Немировых-Колодкиных</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1877,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1877.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1877.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1877.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1877);
+								let myPlacemark1875 = new ymaps.Placemark([55.719421266344,37.609939896837], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Богадельня московского дворянства имени Степана Дмитриевича Нечаева</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1875,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1875.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1875.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1875.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1875);
+								let myPlacemark1874 = new ymaps.Placemark([55.745322780106,37.665059292093], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Дом бесплатных квартир имени Н.А. и А. А. Мазуриных</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1874,
+								customBaseIconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1874.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1874.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1874.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1874);
+								let myPlacemark1872 = new ymaps.Placemark([55.773498884472,37.635333660405], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Странноприимный дом</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1872,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1872.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1872.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1872.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1872);
+								let myPlacemark1870 = new ymaps.Placemark([55.726614896718,37.610587074559], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Богадельня имени Алексея Ивановича и Александры Кирилловны Колесовых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1870,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1870.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1870.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1870.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1870);
+								let myPlacemark1868 = new ymaps.Placemark([55.725936764933,37.611032853674], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Убежище имени Степана Алексеевича и Анны Павловны Тарасовых для престарелых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1868,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1868.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1868.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1868.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1868);
+								let myPlacemark1866 = new ymaps.Placemark([55.767055172693,37.663291239213], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московское Александровское Коммерческое училище</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1866,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1866.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1866.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1866.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1866);
+								let myPlacemark1864 = new ymaps.Placemark([55.719326565874,37.602599814393], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Ремесленное училище имени Козьмы Терентьевича Солдатенкова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1864,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1864.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1864.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1864.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1864);
+								let myPlacemark1863 = new ymaps.Placemark([55.737873887028,37.603395898011], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Техническое училище имени Флора Яковлевича Ермакова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1863,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1863.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1863.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1863.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1863);
+								let myPlacemark1862 = new ymaps.Placemark([55.72647642295,37.629008979826], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Солодовниковское училище Московского Купеческого Общества</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1862,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1862.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1862.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1862.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1862);
+								let myPlacemark1860 = new ymaps.Placemark([55.732175084289,37.578197690946], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Педагогический институт имени П.Г. Шелапутина и Реальное училище имени А.П. Шелапутина</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1860,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1860.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1860.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1860.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1860);
+								let myPlacemark1859 = new ymaps.Placemark([55.731434304831,37.578944289461], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">8-я мужская Образцовая гимназия имени Григория Шелапутина</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1859,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1859.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1859.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1859.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1859);
+								let myPlacemark1857 = new ymaps.Placemark([55.7275129161,37.629105889181], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский коммерческий институт</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1857,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1857.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1857.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1857.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1857);
+								let myPlacemark1855 = new ymaps.Placemark([55.727200204366,37.606922762541], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московское городское мещанское училище</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1855,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1855.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1855.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1855.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1855);
+								let myPlacemark1853 = new ymaps.Placemark([55.74698700607,37.660038196817], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городское училище имени Александра Владимировича Алексеева</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1853,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1853.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1853.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1853.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1853);
+								let myPlacemark1851 = new ymaps.Placemark([55.734224437935,37.624635692597], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Александро-Мариинское училище</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1851,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1851.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1851.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1851.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1851);
+								let myPlacemark1848 = new ymaps.Placemark([55.760700539071,37.604897343889], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Гимназия имени Сергея Алексеевича и Ксении Васильевны Капцовых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1848,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1848.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1848.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1848.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1848);
+								let myPlacemark1847 = new ymaps.Placemark([55.74703252487,37.595422912527], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">9-я классическая гимназия имени И.Л. и А.К. Медведниковых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1847,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1847.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1847.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1847.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1847);
+								let myPlacemark1840 = new ymaps.Placemark([55.766987743435,37.597175775703], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Комисаровское техническое училище</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1840,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1840.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1840.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1840.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1840);
+								let myPlacemark1838 = new ymaps.Placemark([55.738726451013,37.62378743457], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Петрографический институт Аршинова «Litogeae»</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1838,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1838.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1838.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1838.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1838);
+								let myPlacemark1836 = new ymaps.Placemark([55.77729765882,37.595362902475], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский городской народный университет имени Альфонса Леоновича Шанявского</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1836,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1836.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1836.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1836.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1836);
+								let myPlacemark1834 = new ymaps.Placemark([55.771225795549,37.639551484361], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городская усадьба Саввы Ивановича Мамонтова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1834,
+								customBaseIconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1834.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1834.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1834.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1834);
+								let myPlacemark1832 = new ymaps.Placemark([55.758826364901,37.601721608415], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Кустарный музей</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1832,
+								customBaseIconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1832.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1832.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1832.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1832);
+								let myPlacemark1830 = new ymaps.Placemark([55.758131906413,37.5963333483], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Особняк Степана Павловича Рябушинского</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1830,
+								customBaseIconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1830.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1830.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1830.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1830);
+								let myPlacemark1828 = new ymaps.Placemark([55.764403326238,37.571542438687], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городская усадьба  Петра Ивановича Щукина</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1828,
+								customBaseIconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1828.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1828.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1828.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1828);
+								let myPlacemark1826 = new ymaps.Placemark([55.749877743665,37.608453953043], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский публичный и Румянцевский музеум</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1826,
+								customBaseIconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1826.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1826.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1826.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1826);
+								let myPlacemark1824 = new ymaps.Placemark([55.747153189341,37.605537599928], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Музей Изящных Искусств имени императора Александра III</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1824,
+								customBaseIconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1824.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1824.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1824.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1824);
+								let myPlacemark1822 = new ymaps.Placemark([55.741042058721,37.592757665887], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Особняк Ивана Абрамовича Морозова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1822,
+								customBaseIconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1822.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1822.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1822.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1822);
+								let myPlacemark1820 = new ymaps.Placemark([55.754875672734,37.668640280892], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Дом призрения для бедных имени Герасима Ивановича Хлудова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1820,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1820.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1820.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1820.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1820);
+								let myPlacemark1818 = new ymaps.Placemark([55.765955348876,37.650559270158], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский Работный дом</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1818,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1818.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1818.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1818.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1818);
+								let myPlacemark1816 = new ymaps.Placemark([55.770815736703,37.566216671047], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">«Брестский» ночлежный дом</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/668/668700471c84eee717d3fd41b8b94911.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1816,
+								customBaseIconImageHref: '/upload/iblock/668/668700471c84eee717d3fd41b8b94911.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1816.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1816.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1816.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1816);
+								let myPlacemark1814 = new ymaps.Placemark([55.748164707105,37.621056180397], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Дом бесплатных квартир для многодетных вдов с детьми и учащихся девиц имени братьев Петра, Александра и Василия Бахрушиных </div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1814,
+								customBaseIconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1814.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1814.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1814.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1814);
+								let myPlacemark1813 = new ymaps.Placemark([55.786928700061,37.632642724383], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Дома дешевых квартир имени Г. Г. Солодовникова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1813,
+								customBaseIconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1813.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1813.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1813.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1813);
+								let myPlacemark1812 = new ymaps.Placemark([55.738563469805,37.612391435876], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Народная столовая, основанная Павлом Михайловичем Рябушинским</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1812,
+								customBaseIconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1812.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1812.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1812.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1812);
+								let myPlacemark1810 = new ymaps.Placemark([55.769880721786,37.65553745009], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Дом Флора Яковлевича Ермакова - бесплатная столовая</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1810,
+								customBaseIconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1810.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1810.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1810.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1810);
+								let myPlacemark1808 = new ymaps.Placemark([55.760405475837,37.615732450936], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Здание театра Гавриила Гаврииловича Солодовникова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1808,
+								customBaseIconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1808.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1808.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1808.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1808);
+								let myPlacemark1805 = new ymaps.Placemark([55.760260735789,37.612989031849], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Московский Художественный театр</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1805,
+								customBaseIconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1805.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1805.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1805.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1805);
+								let myPlacemark1804 = new ymaps.Placemark([55.759731097142,37.620444772148], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Малый театр</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1804,
+								customBaseIconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1804.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1804.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1804.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1804);
+								let myPlacemark1802 = new ymaps.Placemark([55.74916503485,37.604438998169], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Особняк Сергея Ивановича Щукина</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1802,
+								customBaseIconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1802.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1802.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1802.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1802);
+								let myPlacemark1800 = new ymaps.Placemark([55.731897783197,37.637951701009], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Театральный музей имени Алексея Александровича Бахрушина</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1800,
+								customBaseIconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1800.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1800.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1800.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1800);
+								let myPlacemark1798 = new ymaps.Placemark([55.727527454836,37.564397408863], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Институт для лечения опухолей имени Морозовых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1798,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1798.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1798.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1798.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1798);
+								let myPlacemark1797 = new ymaps.Placemark([55.715633083507,37.593216259992], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Больница для неизлечимых и богадельня имени И.Л. и А.К. Медведниковых </div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1797,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1797.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1797.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1797.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1797);
+								let myPlacemark1795 = new ymaps.Placemark([55.786847932583,37.695703794933], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Детская больница Святого Владимира</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1795,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1795.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1795.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1795.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1795);
+								let myPlacemark1793 = new ymaps.Placemark([55.777404985408,37.58941456057], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городской родильный дом имени Агриппины Александровны Абрикосовой</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1793,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1793.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1793.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1793.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1793);
+								let myPlacemark1791 = new ymaps.Placemark([55.731513173373,37.571731178293], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name"> Клиника детских болезней имени Михаила Алексеевича Хлудова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1791,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1791.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1791.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1791.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1791);
+								let myPlacemark1789 = new ymaps.Placemark([55.733034047928,37.581819622699], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Психиатрическая клиника имени Абрама Абрамовича Морозова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1789,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1789.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1789.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1789.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1789);
+								let myPlacemark1786 = new ymaps.Placemark([55.724211183753,37.618720443323], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Детская больница имени Викула Елисеевича Морозова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1786,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1786.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1786.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1786.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1786);
+								let myPlacemark1785 = new ymaps.Placemark([55.78216810851,37.553614647594], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городская больница имени К. Т. Солдатенкова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1785,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1785.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1785.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1785.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1785);
+								let myPlacemark1779 = new ymaps.Placemark([55.793290375013,37.688827406683], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Больница имени братьев Петра, Александра и Василия Бахрушиных</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1779,
+								customBaseIconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1779.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1779.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1779.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1779);
+								let myPlacemark1777 = new ymaps.Placemark([55.765226259276,37.63443512594], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Городская читальня имени Ивана Сергеевича Тургенева</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/0e5/0e5d9ab689f88bfeb875b2ba5ad8d254.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1777,
+								customBaseIconImageHref: '/upload/iblock/0e5/0e5d9ab689f88bfeb875b2ba5ad8d254.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1777.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1777.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1777.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1777);
+								let myPlacemark1776 = new ymaps.Placemark([55.74346665855,37.620690274387], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Приют для вдов и сирот русских художников имени Павла Михайловича Третьякова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1776,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1776.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1776.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1776.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1776);
+								let myPlacemark1775 = new ymaps.Placemark([55.724317752593,37.626938731745], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Богадельня имени  Павла Михайловича Третьякова</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1775,
+								customBaseIconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1775.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1775.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1775.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1775);
+								let myPlacemark1773 = new ymaps.Placemark([55.71889137198,37.604955346659], {
+								/*hintContent: 'Собственный значок метки',
+								balloonContent: 'Это красивая метка'*/
+								'hintContent' : '<div class="projects_map__mainblock__point__wrap">' +
+								'<div class="projects_map__mainblock__point__name">Арнольдо-Третьяковское училище для глухонемых</div>' +
+								//'<div class="projects_map__mainblock__point__name__old"></div>' +
+								'</div>'
+								}, {
+								iconLayout: 'default#image',
+								iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								iconImageSize: [50, 62],
+								iconImageOffset: [-5, -38],
+								customParamProjectId : 1773,
+								customBaseIconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+								customBaseIconImageHover: '/upload/iblock/e6d/e6d51a7721b83f1c4e994de0bd78fc86.svg',
+								});
+								myPlacemark1773.events.add("click", function (e) {
+								CJSYandexMapHelper.openPopup(e);
+								});
+								/*myPlacemark1773.events.add("hover", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHover'))
+								});
+								myPlacemark1773.events.add("mouseleave", function (e) {
+								let target = e.get('target');
+								target.options.set('iconImageHref', target.options.get('customBaseIconImageHref'))
+								});*/
+								projectsMapMainblock.geoObjects.add(myPlacemark1773);
+								});
+							#projects_map__mainblock.projects_map__mainblock(style='')
+								ymaps.ymaps-2-1-79-map(style='width: 1920px; height: 100%;')
+									ymaps.ymaps-2-1-79-map.ymaps-2-1-79-i-ua_js_yes.ymaps-2-1-79-map-bg.ymaps-2-1-79-islets_map-lang-ru(style='width: 1920px; height: 722px; z-index: 0;')
+										ymaps.ymaps-2-1-79-inner-panes
+											ymaps.ymaps-2-1-79-events-pane.ymaps-2-1-79-user-selection-none(unselectable='on' style='height: 100%; width: 100%; top: 0px; left: 0px; position: absolute; z-index: 3000; cursor: url("https://api-maps.yandex.ru/2.1.79/build/release/images/cursor/grab.cur") 16 16, url("https://api-maps.yandex.ru/2.1.79/build/release/images/cursor/grab.cur"), move;')
+											ymaps.ymaps-2-1-79-ground-pane(style='top: 0px; left: 0px; position: absolute; transform: translate3d(0px, 0px, 0px) scale(1, 1); z-index: 601;')
+												ymaps(style='z-index: 150; position: absolute;')
+													canvas(style='position: absolute; width: 2176px; height: 978px; left: -128px; top: -128px;' height='978' width='2176')
+											ymaps.ymaps-2-1-79-copyrights-pane(style='height: 0px; inset: auto 0px 0px; position: absolute; z-index: 6002;')
+												ymaps
+													ymaps.ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no(style='')
+														ymaps.ymaps-2-1-79-copyright__fog …
+														ymaps.ymaps-2-1-79-copyright__wrap
+															ymaps.ymaps-2-1-79-copyright__layout
+																ymaps.ymaps-2-1-79-copyright__content-cell
+																	ymaps.ymaps-2-1-79-copyright__content
+																		ymaps.ymaps-2-1-79-copyright__text © Яндекс
+																		ymaps.ymaps-2-1-79-copyright__agreement
+																			a.ymaps-2-1-79-copyright__link(target='_blank' href='https://yandex.ru/legal/maps_termsofuse/?lang=ru' rel='noopener') Условия использования
+																ymaps.ymaps-2-1-79-copyright__logo-cell
+																	a.ymaps-2-1-79-copyright__logo(href='https://muzeydela.ru/map/' target='_blank')
+												ymaps.ymaps-2-1-79-map-copyrights-promo
+													ymaps
+														ymaps.ymaps-2-1-79-gotoymaps(title='Открыть в Яндекс.Картах')
+															ymaps.ymaps-2-1-79-gotoymaps__container
+																ymaps.ymaps-2-1-79-gotoymaps__pin
+																ymaps.ymaps-2-1-79-gotoymaps__text-container
+																	ymaps.ymaps-2-1-79-gotoymaps__text Открыть в Яндекс.Картах
+														ymaps.ymaps-2-1-79-gototaxi(title='Доехать на такси' style='display: none;')
+															ymaps.ymaps-2-1-79-gototaxi__container
+																ymaps.ymaps-2-1-79-gototaxi__pin
+																ymaps.ymaps-2-1-79-gototaxi__text-container
+																	ymaps.ymaps-2-1-79-gototaxi__text
+														a.ymaps-2-1-79-gototech(target='_blank' href='https://tech.yandex.ru/maps/mapsapi/?from=api-maps') Создать свою карту
+											ymaps.ymaps-2-1-79-controls-pane(style='width: 100%; top: 0px; left: 0px; position: absolute; z-index: 5403;')
+												ymaps.ymaps-2-1-79-controls__toolbar(style='margin-top: 10px;')
+													ymaps.ymaps-2-1-79-controls__toolbar_left
+													ymaps.ymaps-2-1-79-controls__toolbar_right
+												ymaps.ymaps-2-1-79-controls__bottom(style='top: 722px;')
+												ymaps.ymaps-2-1-79-controls__control(style='margin-right: 0px; margin-left: 0px; position: inherit; inset: 108px auto auto 10px;')
+													ymaps
+														ymaps.ymaps-2-1-79-zoom(style='height: 150px')
+															ymaps.ymaps-2-1-79-zoom__plus.ymaps-2-1-79-zoom__button.ymaps-2-1-79-float-button.ymaps-2-1-79-user-selection-none(unselectable='on')
+																ymaps.ymaps-2-1-79-zoom__icon.ymaps-2-1-79-float-button-icon
+															ymaps.ymaps-2-1-79-zoom__minus.ymaps-2-1-79-zoom__button.ymaps-2-1-79-float-button.ymaps-2-1-79-user-selection-none(unselectable='on')
+																ymaps.ymaps-2-1-79-zoom__icon.ymaps-2-1-79-float-button-icon
+															ymaps.ymaps-2-1-79-zoom__scale
+																ymaps.ymaps-2-1-79-zoom__runner.ymaps-2-1-79-zoom__button.ymaps-2-1-79-float-button.ymaps-2-1-79-zoom__runner__transition.ymaps-2-1-79-touch-action-none.ymaps-2-1-79-user-selection-none(unselectable='on' style='top: 51px;')
+																	ymaps.ymaps-2-1-79-zoom__icon.ymaps-2-1-79-float-button-icon.ymaps-2-1-79-float-button-icon_icon_runner
+											ymaps.ymaps-2-1-79-places-pane(style='top: 0px; left: 0px; position: absolute; transform: translate3d(0px, 0px, 0px) scale(1, 1); z-index: 2404;')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 937px; top: 471px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 637px; top: 518px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 862px; top: 591px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 898px; top: 712px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1048px; top: -150px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 867px; top: 611px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 785px; top: 780px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1106px; top: 512px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 933px; top: 221px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 789px; top: 705px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 791px; top: 712px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1096px; top: 288px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 742px; top: 781px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 747px; top: 589px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 896px; top: 707px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 600px; top: 648px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 604px; top: 656px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 896px; top: 696px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 767px; top: 699px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1077px; top: 495px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 870px; top: 627px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 755px; top: 353px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 700px; top: 495px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 710px; top: 288px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 865px; top: 580px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 700px; top: 182px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 957px; top: 245px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 737px; top: 373px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 706px; top: 380px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 561px; top: 315px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 776px; top: 465px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 759px; top: 493px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 685px; top: 556px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1127px; top: 414px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1021px; top: 299px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 530px; top: 249px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/668/668700471c84eee717d3fd41b8b94911.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 850px; top: 483px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 917px; top: 82px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 799px; top: 582px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1050px; top: 259px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 819px; top: 356px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 803px; top: 358px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 846px; top: 363px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 753px; top: 473px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 948px; top: 651px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 519px; top: 696px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 687px; top: 819px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1284px; top: 83px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 665px; top: 181px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 562px; top: 655px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 621px; top: 639px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 836px; top: 730px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 457px; top: 132px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 1244px; top: 17px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 927px; top: 307px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/0e5/0e5d9ab689f88bfeb875b2ba5ad8d254.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 847px; top: 531px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 884px; top: 729px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg");')
+												ymaps.ymaps-2-1-79-placemark-overlay.ymaps-2-1-79-user-selection-none(unselectable='on' style='z-index: 650; height: 0px; width: 0px; position: absolute; left: 756px; top: 785px;')
+													ymaps
+														ymaps.ymaps-2-1-79-image(style='position: absolute; left: -5px; top: -38px; width: 50px; height: 62px; opacity: 1; background-position: 0px 0px; background-size: 50px 62px; background-image: url("https://muzeydela.ru/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg");')
+										ymaps.ymaps-2-1-79-outer-panes
+											ymaps.ymaps-2-1-79-outerHint-pane(style='top: 0px; left: 0px; position: absolute; z-index: 7205;')
+								script.
+									$(document).ready(function () {
+									$('.js_projects_map__ajax__slider').hover(function () {
+									$('.projects_map_popup__head__slider__item_0').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').stop(true, true);
+									if ($(this).find('.projects_map_popup__head__slider__item').length > 1) {
+									$('.projects_map_popup__head__slider__item_0').fadeOut(300);
+									$('.projects_map_popup__head__slider__item_1').fadeIn(300);
+									}
+									}, function () {
+									if ($(this).find('.projects_map_popup__head__slider__item').length > 1) {
+									$('.projects_map_popup__head__slider__item_0').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').fadeOut(300);
+									$('.projects_map_popup__head__slider__item_0').fadeIn(300);
+									}
+									});
+									/*$('.js_projects_map__ajax__slider').slick({
+									dots: true,
+									arrows: false,
+									speed : 0
+									});
+									$('.projects_map_popup__head__slider .slick-dots li').hover(function () {
+									let index = $(this).index();
+									$('.js_projects_map__ajax__slider').slick('slickGoTo', $(this).index());
+									}, function () {
+									});*/
+									});
+								.projects_map_popup(style='left: 0px;')
+									.projects_map_popup__content
+										.projects_map_popup__close(onclick='CJSYandexMapHelper.closePopup(); return false;')
+										.projects_map_popup__head.js_projects_map__ajax__slider
+											.projects_map_popup__head__slider
+												.projects_map_popup__head__slider__item.projects_map_popup__head__slider__item_0(style="background-image: url('/upload/resize_cache/iblock/371/1000_1000_1/371c8e2a1fb430f33633dae07e6d930c.jpeg');")
+												.projects_map_popup__head__slider__item.projects_map_popup__head__slider__item_1(style="background-image: url('/upload/resize_cache/iblock/68d/1000_1000_1/68d28071e94c55695075ce79e43816b7.jpg');")
+											.projects_map_popup__row_head
+												.projects_map_popup__name
+													| Городская читальня имени Ивана Сергеевича Тургенева
+												.projects_map_popup__address
+													| Бобров переулок, дом 6, строение 1
+											.projects_map_popup__footer
+												a.btn.projects_map_popup__btn(href='https://muzeydela.ru/map/gorodskaya-chitalnya-imeni-ivana-sergeevicha-turgeneva/')
+													| проложить маршрут
+										.projects_map_popup__info
+											.projects_map_popup__info__item.projects_map_popup__info__item__first
+												.projects_map_popup__info__item__title
+													| Благотворитель
+												.projects_map_popup__info__item__val.projects_map_popup__info__item__val__philantrops
+													.projects_map_popup__info__item__pic(style="background-image: url('/upload/iblock/92a/92a06035ad857816c422a73b977338a7.jpg');")
+													.projects_map_popup__info__item__pic__text
+														a(href='https://muzeydela.ru/map/varvara-alekseevna-morozova/')
+															| Варвара Алексеевна Морозова
+											.projects_map_popup__info__item.projects_map_popup__info__item__last
+												.projects_map_popup__info__item__title
+													| Дата основания
+												.projects_map_popup__info__item__val
+													| 1885
+										.projects_map_popup__preview_text
+											| Старейшая в Москве городская общедоступная бесплатная библиотека-читальня была открыта в 1885 году на средства известной московской благотворительницы Варвары Алексеевны Морозовой в память о великом русском писателе Иване Сергеевиче Тургеневе, который скончался в 1883 году. 13 сентября 1883 года, потрясенная смертью любимого писателя, В.А.Морозова сделала заявление в Московскую Городскую Думу: 
+											br
+											| «Желая почтить память великого писателя, имею честь предложить Городской Думе основать в Москве бесплатную читальню имени И.С.Тургенева в ведении Городской Думы, на следующих условиях:
+											br
+											| 1. Я жертвую пять тысяч рублей на приобретение книг и пять тысяч в фонд для пополнения библиотеки и выписки газет и журналов на проценты, которые он будет приносить.
+											br
+											| 2. Я принимаю на себя первоначальное обзаведение читальни и, на первые пять лет, расходы по ее содержанию…»
+									a.btn.projects_map_popup__btn.btn-more(href='#')
+												| подробнее
+								script.
+									$(document).ready(function () {
+									$('.js_projects_map__ajax__slider').hover(function () {
+									$('.projects_map_popup__head__slider__item_0').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').stop(true, true);
+									if ($(this).find('.projects_map_popup__head__slider__item').length > 1) {
+									$('.projects_map_popup__head__slider__item_0').fadeOut(300);
+									$('.projects_map_popup__head__slider__item_1').fadeIn(300);
+									}
+									}, function () {
+									if ($(this).find('.projects_map_popup__head__slider__item').length > 1) {
+									$('.projects_map_popup__head__slider__item_0').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').stop(true, true);
+									$('.projects_map_popup__head__slider__item_1').fadeOut(300);
+									$('.projects_map_popup__head__slider__item_0').fadeIn(300);
+									}
+									});
+									/*$('.js_projects_map__ajax__slider').slick({
+									dots: true,
+									arrows: false,
+									speed : 0
+									});
+									$('.projects_map_popup__head__slider .slick-dots li').hover(function () {
+									let index = $(this).index();
+									$('.js_projects_map__ajax__slider').slick('slickGoTo', $(this).index());
+									}, function () {
+									});*/
+									});
+							style.
+								html{
+								overflow: hidden;
+								}
+								.body:not(.index) .main>.container {
+								padding-bottom: 0 !important;
+								}
+	.bx_areas
+		// Yandex.Metrika counter
+		script.
+			(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+			ym(52035765, "init", {
+			id:52035765,
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+			});
+		// /Yandex.Metrika counter
+	.inline-search-block.fixed.with-close.big
+		.maxwidth-theme
+			.search-wrapper
+				#title-search
+					form.search(action='https://muzeydela.ru/search/')
+						.search-input-div
+							input#title-search-input.search-input(type='text' name='q' value='' placeholder='Найти' size='40' maxlength='50' autocomplete='off')
+						.search-button-div
+							button.btn.btn-search.btn-default.btn-lg(type='submit' name='s' value='Найти') Найти
+							span.close-block.inline-search-hide
+								span.svg.svg-close.close-icons
+									svg.svg.svg-close(width='14' height='14' viewBox='0 0 14 14')
+										path.cls-1(data-name='Rounded Rectangle 568 copy 16' d='M1009.4,953l5.32,5.315a0.987,0.987,0,0,1,0,1.4,1,1,0,0,1-1.41,0L1008,954.4l-5.32,5.315a0.991,0.991,0,0,1-1.4-1.4L1006.6,953l-5.32-5.315a0.991,0.991,0,0,1,1.4-1.4l5.32,5.315,5.31-5.315a1,1,0,0,1,1.41,0,0.987,0.987,0,0,1,0,1.4Z' transform='translate(-1001 -946)')
+	script.
+		var jsControl = new JCTitleSearch2({
+		//'WAIT_IMAGE': '/bitrix/themes/.default/images/wait.gif',
+		'AJAX_PAGE' : '/map/',
+		'CONTAINER_ID': 'title-search',
+		'INPUT_ID': 'title-search-input',
+		'MIN_QUERY_LEN': 2
+		});
+	// noindex
+	.ajax_basket
+	// /noindex
+	.fly_forms
+	.warning_popup_info__bg.js_order_not_availabel.js_order_not_availabel_shadow(style='display: none;')
+	.warning_popup_info.js_order_not_availabel(style='display: none;')
+		.warning_popup_info__body
+			.warning_popup_info__body__picture
+				img(src='map_files//warning_popup_img.png' alt='')
+			.warning_popup_info__body__text
+				.warning_popup_info__body__title
+					| График экскурсий
+				.warning_popup_info__body__text__vle
+					| Обращаем Ваше внимание, что пешеходные экскурсии проводятся в период с апреля по октябрь
+				.warning_popup_info__body__btn
+					a.js_order_not_availabel_close.btn(href='https://muzeydela.ru/map/#') Закрыть
+	script.
+		$(document).ready(function(){
+		$('.js_order_not_availabel_close').click(function (){
+		$('.js_order_not_availabel').hide();
+		return false;
+		});
+		$('.js_order_not_availabel_shadow').click(function (){
+		$('.js_order_not_availabel').hide();
+		return false;
+		});
+		});
+	// Global site tag (gtag.js) - Google Analytics
+	script(async='' src='map_files//js')
+	script.
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-138646000-1');
+	.title-search-result.title-search-input.fixed_type(style='display: none;')
+	a#scrollToTop.scroll-to-top.ROUND_COLOR.PADDING.rotateOut(href='https://muzeydela.ru/map/#')
+
+
+	

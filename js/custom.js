@@ -1,6 +1,9 @@
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function () {
-	$('.custom-select-js').select2();
+	$('.custom-select-js').select2({
+		dropdownParent: $(".select-wrap")
+	});
+	$('.custom-select-filter-js').select2();
 	$(".theme-block__toggle").click(function () {
 		$(".theme-block").toggleClass('active');
 		$(this).toggleClass('active').next().slideToggle();
@@ -66,5 +69,18 @@ $(document).ready(function () {
 			})
 		});
 	}
+
+	$(document).on("click", '[data-filter]', function(){
+		let  self = $(this);
+		let tab = self.data("filter");
+		console.log(tab);
+		$(`[data-filter]`).removeClass("active");
+		$(`[data-filter="${tab}"]`).addClass("active");
+		$(tab).fadeIn(function(){
+			$(this).addClass("active")
+		})
+		.siblings().hide().removeClass("active")
+		;
+	})
 });
 

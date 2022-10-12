@@ -1,0 +1,1199 @@
+include _head.pug
+include blocks/_filter.pug
+include blocks/_footer.pug
++head 
+	.body.hover_
+		.body_media
+		.main.banner-(role='main')
+			.container
+				.row
+					.col-md-12.col-sm-12.col-xs-12.content-md
+						.js_exclude_mobile_swipe
+						+filter
+						.projects_map__detail
+							.projects_map__detail__pre_head
+								.projects_map__detail__title
+									| Комисаровское техническое училище
+								.projects_map__detail__addres
+									span.projects_map__detail__addres__icon
+									|                 Благовещенский переулок, дом 1А и улица Большая Садовая, дом 14, строение 3
+								.page-top.page-top--icon-wrap.clearfix
+									.share.top(style='display: block;')
+										.shares-block
+											svg.svg.svg-share(id='share.svg' xmlns='http://www.w3.org/2000/svg' width='14' height='16' viewBox='0 0 14 16')
+												path#Ellipse_223_copy_8.cls-1(data-name='Ellipse 223 copy 8' d='M1613,203a2.967,2.967,0,0,1-1.86-.661l-3.22,2.01a2.689,2.689,0,0,1,0,1.3l3.22,2.01A2.961,2.961,0,0,1,1613,207a3,3,0,1,1-3,3,3.47,3.47,0,0,1,.07-0.651l-3.21-2.01a3,3,0,1,1,0-4.678l3.21-2.01A3.472,3.472,0,0,1,1610,200,3,3,0,1,1,1613,203Zm0,8a1,1,0,1,0-1-1A1,1,0,0,0,1613,211Zm-8-7a1,1,0,1,0,1,1A1,1,0,0,0,1605,204Zm8-5a1,1,0,1,0,1,1A1,1,0,0,0,1613,199Z' transform='translate(-1602 -197)')
+											
+									.print-link
+										svg.svg.svg-print(xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16')
+											path#Rectangle_665_copy_4.cls-print(data-name='Rectangle 665 copy 4' d='M1570,210h-2v3h-8v-3h-2a2,2,0,0,1-2-2v-5a2,2,0,0,1,2-2h2v-4h8v4h2a2,2,0,0,1,2,2v5A2,2,0,0,1,1570,210Zm-8,1h4v-4h-4v4Zm4-12h-4v2h4v-2Zm4,4h-12v5h2v-3h8v3h2v-5Z' transform='translate(-1556 -197)')
+
+							.projects_map__detail__mobile_tabs
+								a.projects_map__detail__mobile_tab.active(href='#' data-tab-id='1') Фото
+								a.projects_map__detail__mobile_tab(href='#' data-tab-id='2') Карта
+							.projects_map__detail__head
+								.js_projects_map__detail_tab_1.active.projects_map__detail__head__col
+									.projects_map__detail__slider__wrap
+										.projects_map__detail__slider.js_projects_map__detail__slider
+											- for (var x = 0; x < 3; x++)
+												.projects_map__detail__slider__item(slide-title-content='' style="background-image: url('https://muzeydela.ru/upload/iblock/acd/acda87efc35a8c4c5f3edcfb63086d53.jpg');") 
+										.projects_map__detail__slider__footer
+											.projects_map__detail__slider__footer__counter
+												span.js_projects_map__detail__slider__slide_num 1 / 3
+											.projects_map__detail__slider__footer__title.js_projects_map__detail__slider__slide_title
+								.js_projects_map__detail_tab_2.projects_map__detail__head__col
+									#projects_map__detail__mapholder.projects_map__detail__map
+							.maxwidth-theme
+								.row
+									div(class="col-md-3 col-sm-3 hidden-xs hidden-sm left-menu-md")
+										.sidearea
+											.qr_block.qr_block--left-sidearea
+												.qr_block__img
+													img(src='/bitrix/templates/aspro-priority/add_on_images/footer_qr_2.png' alt='')
+												.qr_block__title
+													| Поддержи музей
+												.qr_block__logo
+													img(src='/bitrix/templates/aspro-priority/add_on_images/sbp_logo_black.png' alt='')
+											.side_forms
+												
+												.button.font_upper_md.add_review_icon
+													span.dark-color.animate-load.border.shadow(title='Дополнить' data-event='jqm' data-param-id='30' data-name='add_review')
+														span
+															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<circle cx="12" cy="12" r="11" stroke="#96BF31" stroke-width="2"/>
+																<path d="M5.63599 12L18.3639 12" stroke="#96BF31" stroke-width="2" stroke-miterlimit="3.8637"/>
+																<path d="M12 18.364L12 5.63603" stroke="#96BF31" stroke-width="2" stroke-miterlimit="3.8637"/>
+																</svg>
+
+															| 						Дополнить <br> информацию  <br>  об объекте
+									div(class="col-md-9 col-sm-12 col-xs-12 content-md") 
+										.projects_map__detail__content
+											.projects_map__detail__history
+												| История здания
+											.projects_map__detail__info
+												.projects_map__detail__info__col
+													.projects_map__detail__info__title
+														| Благотворитель
+													.projects_map__detail__info__body.projects_map__detail__info__philantrop
+														.projects_map__detail__info__icon(style="background-image: url('img/299a06327e6cbd1b768039863330ee01.jpg');")
+														.projects_map__detail__info__text
+															a(href='/map/petr-ionovich-gubonin/') Петр Ионович Губонин
+												.projects_map__detail__info__col
+													.projects_map__detail__info__title
+														| Благотворитель
+													.projects_map__detail__info__body.projects_map__detail__info__philantrop
+														.projects_map__detail__info__icon(style="background-image: url('img/299a06327e6cbd1b768039863330ee01.jpg');")
+														.projects_map__detail__info__text
+															a(href='/map/petr-ionovich-gubonin/') Петр Ионович Губонин
+												.projects_map__detail__info__col
+													.projects_map__detail__info__title
+														| Дата основания
+													.projects_map__detail__info__body
+														| 1865
+												.projects_map__detail__info__col
+													.projects_map__detail__info__title Статус
+													.projects_map__detail__info__body Объект культурного наследия
+											.projects_map__detail__text
+												| Комисаровское техническое училище было учреждено в 1865 году при Арбатском отделении Дамского попечительства о бедных, состоявшим в ведении Попечительницы княгини Надежды Борисовны Трубецкой, как небольшая ремесленная школа для круглых сирот и детей беднейших родителей всех сословий, где их обучали портному и переплетному делу. Первоначально в ремесленной школе обучалось 9 мальчиков, постоянно живущих в школе, и 23 приходящих ученика. 17 апреля 1866 года было дано высочайшее соизволение на присвоение школе наименования Комисаровской в честь шапочного мастера О.И. Комисарова, спасшего императора Александра II при покушении на него Д.В. Каракозовым 4 апреля 1866 года.
+												br
+												| Основателями ремесленной школы, как указано в историческом очерке Комисаровского технического училища, составленном к его 25-летию, являлись секретарь отделения Христиан Христианович Мейен и казначей Петр Ионович Губонин, которые жертвовали значительные средства школе. Так, с 1865 по 1873 год частные пожертвования составили 600 000 рублей, из которых более половины пожертвовано Х.Х. Мейеном -166 тыс. рублей и П.И. Губониным – 172 тыс. рублей.
+												br
+												| Первоначально школа арендовала помещение в Трехпрудном переулке. Благодаря пожертвованиям П.И. Губонина Дамское попечительство смогло купить для школы владение генерал-майорши М.В. Поляковой в Благовещенском переулке. Двухэтажный жилой дом с каменным низом и деревянным жилым вторым этажом и одноэтажный каменный флигель стояли по линии переулка, вдоль задней границы находились деревянные жилые и нежилые постройки. В 1868-1869 гг., вероятнее всего архитектор попечительства К.В. Гриневский объединил оба строения в одно г-образное каменное здание с антресольным этажом в дворовом фасаде. 
+												br
+												| В 1867 году по инициативе Х.Х.Мейена и П.И. Губонина школа была реорганизована в ремесленную с трёхгодичным сроком подготовки мастеров по обработке металла и дерева применительно к железнодорожному делу, которым занимался Губонин. Первоначально преподававшиеся портняжное и переплетное ремесла были заменены слесарным, токарным, кузнечным и столярным. Развивающееся железнодорожное дело и механические заводы чувствовали нехватку в квалифицированных технических кадрах. Комисаровская школа должна была «содействовать к увеличению опытных механиков», в частности, для локомотивных заводов.
+												br
+												| Для практических занятий воспитанников на купленной у Новодевичьего монастыря огородной земле, примыкавшей с северо-запада к владению Комисаровской школы, П.И. Губонин и Х.Х. Мейен выстроили на свои средства учебно-механические мастерские. Вскоре к западу от владения Комисаровской школы на арендованных П.И. Губониным землях по обе стороны Большой Садовой улицы вырос вагонный завод. Вагонный завод и мастерские школы были соединены конно-железным путем со Смоленской и Николаевской железными дорогами.
+												br
+												| В 1871 году иждивением П.И. Губонина при школе была сооружена церковь во имя Св. Благоверного Князя Александра Невского с богатой утварью, ризами и другими предметами, пожертвованными П.И. Губониным. П.И. Губонин оставался Почетным Попечителем училища до своей смерти в 1894 году.
+												br
+												| В 1873 году Комисаровская школа перешла в ведение Министерства финансов, а с  1881 года - Министерства Просвещения. В 1877 году она была переименована в Комисаровское техническое училище. В то время это было одно из лучших технических училищ России. В 80-годы XIX века в училище обучалось уже до 480 учеников. Курс обучения составлял семь лет. Первые пять классов изучались общеобразовательные дисциплины, а в 6 и 7 классах преподавались специальные предметы: механика, электротехника, технология металлов и дерева, техническое черчение.
+												br
+												| В конце XIX- начале XX вв..были построены еще корпуса училища в красно-белом кирпичном стиле архитектором М К. Геппенером. Таким образом, к началу XX в. ансамбль учебных сооружений Комисаровского технического училища состоял из 11 корпусов и занимал обширную территорию в квартале, ограниченном Благовещенским и Ермолаевским переулками и улицами Большой Садовой и Тверской. Центральную часть ансамбля занимал главный корпус, поставленный по красной линии Благовещенского переулка с домовой церковью во имя Св. Благоверного Князя Александра Невского с правой стороны. По центру к дворовому фасаду главного корпуса примыкало торцом четырёхэтажное здание центрального учебного корпуса. Оба корпуса соединял крытый переход по второму этажу. Центральный корпус соединялся крытым переходом с двухэтажным зданием учебных мастерских (с юго-запада) и одноэтажным каменным переходом, в котором был устроен гардероб, с административным трёхэтажным каменным корпусом (с северо-востока).У южной границы владения на заднем дворе стояли одноэтажные каменные казармы служителей и каменный сарай.
+												br
+												|     После Октябрьской революции 1917 года домовая церковь во имя Св. Благоверного Князя Александра Невского была закрыта, Комисаровское техническое училище переименовано в Первый Московский механико-электротехнический техникум им. М.В. Ломоносова, который в 1920-1922 гг. был преобразован в высшее техническое учебное заведение - Московский практический механико-электротехнический институтим. М.В. Ломоносова.
+												br
+												| В 1930-х гг. здания бывшего Комисаровского технического училища занимали Институт сельскохозяйственного машиностроения имени М.И. Калинина, Автотракторный институт, Автомеханический институт имени И.В. Сталина, Машиностроительный институт имени И.Л. Лепсе. В 1980-х гг. комплекс учебных корпусов в Благовещенском переулке принадлежал Министерству обороны СССР, здесь находилась Военно-политическая академия имени В.И. Ленина. В 2000-е годы главный корпус был выведен из состава Академии. В 2012 году он перешел в частные руки, был отреставрирован и сейчас в нем размещается офисный центр.
+											
+											.projects_map__detail__text
+												h6 Заголовок
+												p В книге хранитель Московского музея предпринимателей, меценатов и благотворителей Лев Николаевич Краснопевцев рассказывает о своей жизни. Этапами его необыкновенного жизненного пути были учеба на историческом факультете Московского университета, известный судебный процесс - «дело Краснопевцева», 10 лет мордовских лагерей, работа слесарем-сборщиком на заводе, создание двух музеев.
+
+												p Автор говорит не только о себе - он вспоминает об истории своего рода, в котором было немало выдающихся людей, о предпринимателях и благотворителях прошлого и настоящего, анализирует состояние современного российского общества. Книга рассчитана на широкий круг читателей.
+
+
+												a.video-block(href="https://muzeydela.ru/upload/iblock/acd/acda87efc35a8c4c5f3edcfb63086d53.jpg" data-fancybox)
+													img( src="https://muzeydela.ru/upload/iblock/acd/acda87efc35a8c4c5f3edcfb63086d53.jpg", alt="")
+												.projects_map__detail__info
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title АВтор фото
+														.projects_map__detail__info__body Неретин Николай Игоревич
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title УЧЕБНОЕ ЗАВЕДЕНИЕ
+														.projects_map__detail__info__body Московский социальный <br> университет
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title КЛАСС/КУРС
+														.projects_map__detail__info__body 5 курс
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title Куратор
+														.projects_map__detail__info__body Рябушинский <br> Павел Павлович
+											.projects_map__detail__text
+												h6 Фотогалерея
+												.projects_map_helper__photo
+													.detail
+														.wraps.galerys-block
+															span.switch_gallery
+															.title.small-gallery.font_xs(style='padding-bottom: 31px;')
+															.title.big-gallery.font_xs
+																span.slide-number 1
+																|  / 2
+															.big-gallery-block.thmb1.flexslider.unstyled.row.bigs.wsmooth.dark-nav.flexslider-init.flexslider-direction-nav(data-plugin-options='{"animation": "slide", "directionNav": true, "controlNav" :false, "animationLoop": true, "slideshow": false, "sync": ".gallery-wrapper .small-gallery", "counts": [1, 1, 1], "smoothHeight": true}')
+																.flex-viewport(style='overflow: hidden; position: relative; height: 1000px;')
+																	ul.slides.items(style='width: 400%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px); height: auto; overflow: visible; opacity: 1;')
+																		li.col-md-12.item.active-slides(style='width: 970px; margin-right: 0px; float: left; display: block; opacity: 1;')
+																			img.img-responsive.inline(src='./man_files/0a4a69ba3e5b84e020ff18cd98f5a01c.jpg' title='' alt='')
+																			a.fancybox(href='https://muzeydela.ru/upload/iblock/0a4/0a4a69ba3e5b84e020ff18cd98f5a01c.jpg' rel='gallery' target='_blank' title='')
+																				span.zoom
+																					svg(width='16' height='16' viewBox='0 0 16 16')
+																						path(d='M588,203h-3v-2h3v-3h2v3A2,2,0,0,1,588,203Zm0-14h-3v-2h3a2,2,0,0,1,2,2v3h-2v-3Zm-2,3v6a1,1,0,0,1-1,1h-6a1,1,0,0,1-1-1v-6a1,1,0,0,1,1-1h6A1,1,0,0,1,586,192Zm-2,1h-4v4h4v-4Zm-8-1h-2v-3a2,2,0,0,1,2-2h3v2h-3v3Zm0,9h3v2h-3a2,2,0,0,1-2-2v-3h2v3Z' transform='translate(-574 -187)')
+																		li.col-md-12.item(style='width: 970px; margin-right: 0px; float: left; display: block; opacity: 1;')
+																			img.img-responsive.inline(src='./man_files/215f81a0c7b46d2e284877e2e8de21d7.jpg' title='' alt='')
+																			a.fancybox(href='./man_files/215f81a0c7b46d2e284877e2e8de21d7.jpg' rel='gallery' target='_blank' title='')
+																				span.zoom
+																					svg(width='16' height='16' viewBox='0 0 16 16')
+																						path(d='M588,203h-3v-2h3v-3h2v3A2,2,0,0,1,588,203Zm0-14h-3v-2h3a2,2,0,0,1,2,2v3h-2v-3Zm-2,3v6a1,1,0,0,1-1,1h-6a1,1,0,0,1-1-1v-6a1,1,0,0,1,1-1h6A1,1,0,0,1,586,192Zm-2,1h-4v4h4v-4Zm-8-1h-2v-3a2,2,0,0,1,2-2h3v2h-3v3Zm0,9h3v2h-3a2,2,0,0,1-2-2v-3h2v3Z' transform='translate(-574 -187)')
+																ul.flex-direction-nav.opacity1
+																	li.flex-nav-prev.active-slides
+																		a.flex-prev(href='https://muzeydela.ru/map/petr-ionovich-gubonin/#') Назад
+																	li.flex-nav-next
+																		a.flex-next(href='https://muzeydela.ru/map/petr-ionovich-gubonin/#') Вперед
+															.small-gallery-block
+																.front.bigs
+																	.items.row
+																		.col-md-3.col-sm-4.col-xs-6
+																			.item
+																				.wrap
+																					img.img-responsive.inline(src='./man_files/0a4a69ba3e5b84e020ff18cd98f5a01c.jpg' title='' alt='')
+																		.col-md-3.col-sm-4.col-xs-6
+																			.item
+																				.wrap
+																					img.img-responsive.inline(src='./man_files/215f81a0c7b46d2e284877e2e8de21d7.jpg' title='' alt='')
+													.text-center Городская больница имени К. Т. Солдатенкова
+												.projects_map__detail__info
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title АВтор фото
+														.projects_map__detail__info__body Неретин Николай Игоревич
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title УЧЕБНОЕ ЗАВЕДЕНИЕ
+														.projects_map__detail__info__body Московский социальный <br> университет
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title КЛАСС/КУРС
+														.projects_map__detail__info__body 5 курс
+													.projects_map__detail__info__col
+														.projects_map__detail__info__title Куратор
+														.projects_map__detail__info__body Рябушинский <br> Павел Павлович
+											.page-top.clearfix
+												.share.top(style='display: block;')
+													.shares-block
+														svg.svg.svg-share(id='share.svg' xmlns='http://www.w3.org/2000/svg' width='14' height='16' viewBox='0 0 14 16')
+															path#Ellipse_223_copy_8.cls-1(data-name='Ellipse 223 copy 8' d='M1613,203a2.967,2.967,0,0,1-1.86-.661l-3.22,2.01a2.689,2.689,0,0,1,0,1.3l3.22,2.01A2.961,2.961,0,0,1,1613,207a3,3,0,1,1-3,3,3.47,3.47,0,0,1,.07-0.651l-3.21-2.01a3,3,0,1,1,0-4.678l3.21-2.01A3.472,3.472,0,0,1,1610,200,3,3,0,1,1,1613,203Zm0,8a1,1,0,1,0-1-1A1,1,0,0,0,1613,211Zm-8-7a1,1,0,1,0,1,1A1,1,0,0,0,1605,204Zm8-5a1,1,0,1,0,1,1A1,1,0,0,0,1613,199Z' transform='translate(-1602 -197)')
+														
+												.print-link
+													svg.svg.svg-print(xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16')
+														path#Rectangle_665_copy_4.cls-print(data-name='Rectangle 665 copy 4' d='M1570,210h-2v3h-8v-3h-2a2,2,0,0,1-2-2v-5a2,2,0,0,1,2-2h2v-4h8v4h2a2,2,0,0,1,2,2v5A2,2,0,0,1,1570,210Zm-8,1h4v-4h-4v4Zm4-12h-4v2h4v-2Zm4,4h-12v5h2v-3h8v3h2v-5Z' transform='translate(-1556 -197)')
+											.projects_map__detail__text
+												.button.font_upper_md.add_review_icon
+													span.dark-color.animate-load.border.shadow(title='Дополнить' data-event='jqm' data-param-id='30' data-name='add_review')
+														span
+															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<circle cx="12" cy="12" r="11" stroke="#96BF31" stroke-width="2"/>
+																<path d="M5.63599 12L18.3639 12" stroke="#96BF31" stroke-width="2" stroke-miterlimit="3.8637"/>
+																<path d="M12 18.364L12 5.63603" stroke="#96BF31" stroke-width="2" stroke-miterlimit="3.8637"/>
+																</svg>
+
+															| 						Дополнить   информацию     об объекте
+											.projects_map__detail__text 
+												h4 Объекты рядом
+												.row
+													- for (var x = 0; x < 2; x++)
+														.col-sm-6.col-xs-12
+															.list-view-section-item
+																a.list-view-section-item__img-wrap(href="#")
+																	img(src="img/list.jpg", alt="")
+																.list-view-section-item__body
+																	a(href="#").d-block 
+																		.list-view-section-item__title.list-view-section-item__title--lg Чайный дом на Мясницкой 
+																		.list-view-section-item__title.list-view-section-item__title--sm  Чайный магазин Перлова
+																a.projects_map_popup__address(href="#")  пл. Киевского вокзала, стр. 2
+
+																.projects_map_popup__info__item__title
+																	| Благотворитель
+																a.projects_map_popup__info__item__val.projects_map_popup__info__item__val__philantrops(href='/map/mariya-fyedorovna-morozova/')
+																	.projects_map_popup__info__item__pic(style="background-image: url('img/299a06327e6cbd1b768039863330ee01.jpg');")
+																	.projects_map_popup__info__item__pic__text   Мария Федоровна Морозова
+											.projects_map__detail__text 
+												.btn-wrap
+													a.btn.btn-default(href='/map/' class="btn projects_map__head-btn btn-default     btn-transparent") 
+														svg(width='24' height='22' viewBox='0 0 24 22' fill='none' xmlns='http://www.w3.org/2000/svg')
+															path(d='M8.70845 3.38751L1.40881 1.04788V18.3831L8.70845 21.0479M8.70845 3.38751L15.7273 1.04788M8.70845 3.38751V21.0479M15.7273 1.04788L22.9993 3.38751V21.0479L15.7273 19.0844M15.7273 1.04788V19.0844M15.7273 19.0844L8.70845 21.0479' stroke='#2F3338')
+
+														span.btn-text Карта
+													a.btn.btn-default(href='/map/' class="btn projects_map__head-btn btn-default     btn-transparent") 
+														svg(width='24' height='18' viewBox='0 0 24 18' fill='none' xmlns='http://www.w3.org/2000/svg')
+															path(d='M7.67761 1.04788H23.6776' stroke='#2F3338')
+															path(d='M7.67761 9.04788H23.6776' stroke='#2F3338')
+															path(d='M7.67761 17.0479H23.6776' stroke='#2F3338')
+															path(d='M0.677612 1.04788H4.67761' stroke='#2F3338')
+															path(d='M0.677612 9.04788H4.67761' stroke='#2F3338')
+															path(d='M0.677612 17.0479H4.67761' stroke='#2F3338') 
+														span.btn-text Список
+													
+							//- .projects_map__back
+							//- 	a.btn.btn-default(href='/map/') На карту
+						script.
+							$(document).ready(function () {
+							$('.js_projects_map__detail__slider').slick({
+							responsive : [{
+							breakpoint: 1025,
+							settings : {
+							arrows: false,
+							}
+							}]
+							});
+							$('.js_projects_map__detail__slider').on('afterChange', function (event, slick, currentSlide) {
+							$('.js_projects_map__detail__slider__slide_num').text((currentSlide + 1));
+							let selectedSliderText = $('.js_projects_map__detail__slider').find('.slick-current').attr('slide-title-content');
+							$('.js_projects_map__detail__slider__slide_title').text(selectedSliderText);
+							});
+							
+							$('.js_projects_map__detail__slider2').slick({
+							responsive : [{
+							breakpoint: 1025,
+							settings : {
+							arrows: false,
+							}
+							}]
+							});
+							$('.js_projects_map__detail__slider2').on('afterChange', function (event, slick, currentSlide) {
+							$('.js_projects_map__detail__slider2__slide_num').text((currentSlide + 1));
+							let selectedSliderText = $('.js_projects_map__detail__slider2').find('.slick-current').attr('slide-title-content');
+							$('.js_projects_map__detail__slider__slide_title2').text(selectedSliderText);
+							});
+
+							$('.projects_map__detail__mobile_tab').click(function () {
+							$('.projects_map__detail__mobile_tab').removeClass('active');
+							$(this).addClass('active');
+							let tabId = $(this).data('tab-id');
+							$('.projects_map__detail__head__col').hide();
+							$('.js_projects_map__detail_tab_'+tabId).show();
+							return false;
+							});
+							});
+						script(src='https://api-maps.yandex.ru/2.1/?&lang=ru_RU' type='text/javascript')
+						script.
+							ymaps.ready(function () {
+							var projectsMapMainblock = new ymaps.Map("projects_map__detail__mapholder", {
+							center: [55.766987743435,37.597175775703],
+							zoom: 17,
+							controls: []
+							});
+							projectsMapMainblock.controls.add('zoomControl');
+							projectsMapMainblock.geoObjects.add(new ymaps.Placemark([55.766987743435,37.597175775703], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [40, 52],
+							iconImageOffset: [-5, -38],
+							}));
+							let myPlacemark1761 = new ymaps.Placemark([55.762799066274,37.634578728208], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/chaynyy-dom-na-myasnitskoy/'
+							});
+							myPlacemark1761.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1761);
+							let myPlacemark1763 = new ymaps.Placemark([55.755467882346,37.641858325711], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskaya-usadba-venediktovykh-shnaubertov-monoszona/'
+							});
+							myPlacemark1763.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1763);
+							let myPlacemark1773 = new ymaps.Placemark([55.71889137198,37.604955346659], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/arnoldo-tretyakovskoe-uchilishche-dlya-glukhonemykh/'
+							});
+							myPlacemark1773.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1773);
+							let myPlacemark1775 = new ymaps.Placemark([55.724317752593,37.626938731745], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelnya-imeni-pavla-mikhaylovicha-tretyakova/'
+							});
+							myPlacemark1775.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1775);
+							let myPlacemark1776 = new ymaps.Placemark([55.74346665855,37.620690274387], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/priyut-dlya-vdov-i-sirot-russkikh-khudozhnikov-imeni-pavla-mikhaylovicha-tretyakova/'
+							});
+							myPlacemark1776.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1776);
+							let myPlacemark1777 = new ymaps.Placemark([55.765226259276,37.63443512594], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/0e5/0e5d9ab689f88bfeb875b2ba5ad8d254.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskaya-chitalnya-imeni-ivana-sergeevicha-turgeneva/'
+							});
+							myPlacemark1777.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1777);
+							let myPlacemark1779 = new ymaps.Placemark([55.793290375013,37.688827406683], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bolnitsa-imeni-bratev-petra-aleksandra-i-vasiliya-bakhrushinykh/'
+							});
+							myPlacemark1779.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1779);
+							let myPlacemark1785 = new ymaps.Placemark([55.78216810851,37.553614647594], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskaya-klinicheskaya-bolnitsa-imeni-s-p-botkina/'
+							});
+							myPlacemark1785.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1785);
+							let myPlacemark1786 = new ymaps.Placemark([55.724211183753,37.618720443323], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/detskaya-bolnitsa-imeni-vikula-eliseevicha-morozova/'
+							});
+							myPlacemark1786.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1786);
+							let myPlacemark1789 = new ymaps.Placemark([55.733034047928,37.581819622699], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/psikhiatricheskaya-klinika-im-abrama-abramovicha-morozova/'
+							});
+							myPlacemark1789.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1789);
+							let myPlacemark1791 = new ymaps.Placemark([55.731513173373,37.571731178293], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/klinika-detskikh-bolezney-imeni-mikhaila-alekseevicha-khludova/'
+							});
+							myPlacemark1791.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1791);
+							let myPlacemark1793 = new ymaps.Placemark([55.777404985408,37.58941456057], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskoy-rodilnyy-dom-imeni-agrippiny-aleksandrovny-abrikosovoy/'
+							});
+							myPlacemark1793.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1793);
+							let myPlacemark1795 = new ymaps.Placemark([55.786847932583,37.695703794933], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/detskaya-bolnitsa-svyatogo-vladimira/'
+							});
+							myPlacemark1795.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1795);
+							let myPlacemark1797 = new ymaps.Placemark([55.715633083507,37.593216259992], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bolnitsa-dlya-neizlechimykh-i-bogadelnya-imeni-i-l-i-a-k-medvednikovykh-/'
+							});
+							myPlacemark1797.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1797);
+							let myPlacemark1798 = new ymaps.Placemark([55.727527454836,37.564397408863], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/7be/7bec0c8ae97dd08620e4d5a79879a4e1.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/institut-dlya-lecheniya-opukholey-imeni-morozovykh/'
+							});
+							myPlacemark1798.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1798);
+							let myPlacemark1800 = new ymaps.Placemark([55.731897783197,37.637951701009], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/teatralnyy-muzey-imeni-alekseya-aleksandrovicha-bakhrushina/'
+							});
+							myPlacemark1800.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1800);
+							let myPlacemark1802 = new ymaps.Placemark([55.74916503485,37.604438998169], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/osobnyak-sergeya-ivanovicha-shchukina/'
+							});
+							myPlacemark1802.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1802);
+							let myPlacemark1804 = new ymaps.Placemark([55.759731097142,37.620444772148], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/malyy-teatr/'
+							});
+							myPlacemark1804.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1804);
+							let myPlacemark1805 = new ymaps.Placemark([55.760260735789,37.612989031849], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-khudozhestvennyy-teatr/'
+							});
+							myPlacemark1805.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1805);
+							let myPlacemark1808 = new ymaps.Placemark([55.760405475837,37.615732450936], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/261/261ef0ab482d64d1263d5bbf42453bbe.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/zdanie-teatra-gavriila-gavriilovicha-solodovnikova/'
+							});
+							myPlacemark1808.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1808);
+							let myPlacemark1810 = new ymaps.Placemark([55.769880721786,37.65553745009], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/dom-flora-yakovlevicha-ermakova-besplatnaya-stolovaya/'
+							});
+							myPlacemark1810.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1810);
+							let myPlacemark1812 = new ymaps.Placemark([55.738563469805,37.612391435876], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/4d5/4d509f775b5211f535e75a9b94971e70.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/narodnaya-stolovaya-osnovannaya-pavlom-mikhaylovichem-ryabushinskim/'
+							});
+							myPlacemark1812.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1812);
+							let myPlacemark1813 = new ymaps.Placemark([55.786928700061,37.632642724383], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/doma-deshevykh-kvartir-gavriila-gavriilovicha-solodovnikova/'
+							});
+							myPlacemark1813.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1813);
+							let myPlacemark1814 = new ymaps.Placemark([55.748164707105,37.621056180397], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/dom-besplatnykh-kvartir-dlya-mnogodetnykh-vdov-s-detmi-i-uchashchikhsya-devits-imeni-bratev-petra-al/'
+							});
+							myPlacemark1814.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1814);
+							let myPlacemark1816 = new ymaps.Placemark([55.770815736703,37.566216671047], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/668/668700471c84eee717d3fd41b8b94911.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/brestskiy-gorodskoy-nochlezhnyy-dom-imeni-marii-fedorovny-morozovoy/'
+							});
+							myPlacemark1816.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1816);
+							let myPlacemark1818 = new ymaps.Placemark([55.765955348876,37.650559270158], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-rabotnyy-dom/'
+							});
+							myPlacemark1818.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1818);
+							let myPlacemark1820 = new ymaps.Placemark([55.754875672734,37.668640280892], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/dom-prizreniya-dlya-bednykh-imeni-gerasima-ivanovicha-khludova/'
+							});
+							myPlacemark1820.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1820);
+							let myPlacemark1822 = new ymaps.Placemark([55.741042058721,37.592757665887], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/osobnyak-ivana-abramovicha-morozova/'
+							});
+							myPlacemark1822.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1822);
+							let myPlacemark1824 = new ymaps.Placemark([55.747153189341,37.605537599928], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/muzey-izyashchnykh-iskusstv-imeni-imperatora-aleksandra-iii/'
+							});
+							myPlacemark1824.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1824);
+							let myPlacemark1826 = new ymaps.Placemark([55.749877743665,37.608453953043], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-publichnyy-i-rumyantsevskiy-muzeum/'
+							});
+							myPlacemark1826.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1826);
+							let myPlacemark1828 = new ymaps.Placemark([55.764403326238,37.571542438687], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskaya-usadba-petra-ivanovicha-shchukina/'
+							});
+							myPlacemark1828.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1828);
+							let myPlacemark1830 = new ymaps.Placemark([55.758131906413,37.5963333483], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/osobnyak-stepana-pavlovicha-ryabushinskogo/'
+							});
+							myPlacemark1830.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1830);
+							let myPlacemark1832 = new ymaps.Placemark([55.758826364901,37.601721608415], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/fad/fad55c897568d3e4bc1d07710c48c004.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/kustarnyy-muzey/'
+							});
+							myPlacemark1832.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1832);
+							let myPlacemark1834 = new ymaps.Placemark([55.771225795549,37.639551484361], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/5cd/5cda03f721fd09d049553b6019f5f460.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gorodskaya-usadba-savvy-ivanovicha-mamontova/'
+							});
+							myPlacemark1834.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1834);
+							let myPlacemark1836 = new ymaps.Placemark([55.77729765882,37.595362902475], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-gorodskoy-narodnyy-universitet-imeni-alfonsa-leonovicha-shanyavskogo/'
+							});
+							myPlacemark1836.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1836);
+							let myPlacemark1838 = new ymaps.Placemark([55.738726451013,37.62378743457], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/petrograficheskiy-institut-arshinova-litogeae/'
+							});
+							myPlacemark1838.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1838);
+							let myPlacemark1847 = new ymaps.Placemark([55.74703252487,37.595422912527], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/9-ya-klassicheskaya-gimnaziya-im-i-l-i-a-k-medvednikovykh/'
+							});
+							myPlacemark1847.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1847);
+							let myPlacemark1848 = new ymaps.Placemark([55.760700539071,37.604897343889], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/gimnaziya-im-s-a-i-k-v-kaptsovykh/'
+							});
+							myPlacemark1848.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1848);
+							let myPlacemark1851 = new ymaps.Placemark([55.734224437935,37.624635692597], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/aleksandro-mariinskoe-uchilishche/'
+							});
+							myPlacemark1851.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1851);
+							let myPlacemark1853 = new ymaps.Placemark([55.74698700607,37.660038196817], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/trete-rogozhskoe-gorodskoe-uchilishche/'
+							});
+							myPlacemark1853.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1853);
+							let myPlacemark1855 = new ymaps.Placemark([55.727200204366,37.606922762541], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskoe-gorodskoe-meshchanskoe-uchilishche/'
+							});
+							myPlacemark1855.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1855);
+							let myPlacemark1857 = new ymaps.Placemark([55.7275129161,37.629105889181], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-kommercheskiy-institut/'
+							});
+							myPlacemark1857.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1857);
+							let myPlacemark1859 = new ymaps.Placemark([55.731434304831,37.578944289461], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/8-ya-muzhskaya-obraztsovaya-gimnaziya-imeni-grigoriya-shelaputina/'
+							});
+							myPlacemark1859.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1859);
+							let myPlacemark1860 = new ymaps.Placemark([55.732175084289,37.578197690946], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/pedagogicheskiy-institut-imeni-p-g-shelaputina-i-realnoe-uchilishche-imeni-a-p-shelaputina/'
+							});
+							myPlacemark1860.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1860);
+							let myPlacemark1862 = new ymaps.Placemark([55.72647642295,37.629008979826], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/solodovnikovskoe-uchilishche-moskovskogo-kupecheskogo-obshchestva/'
+							});
+							myPlacemark1862.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1862);
+							let myPlacemark1863 = new ymaps.Placemark([55.737873887028,37.603395898011], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/tekhnicheskoe-uchilishche-imeni-flora-yakovlevicha-ermakova/'
+							});
+							myPlacemark1863.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1863);
+							let myPlacemark1864 = new ymaps.Placemark([55.719326565874,37.602599814393], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/remeslennoe-uchilishche-imeni-kozmy-terentevicha-soldatenkova/'
+							});
+							myPlacemark1864.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1864);
+							let myPlacemark1866 = new ymaps.Placemark([55.767055172693,37.663291239213], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/397/39787688c0b14404a0b502fc90f04015.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskoe-aleksandrovskoe-kommercheskoe-uchilishche/'
+							});
+							myPlacemark1866.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1866);
+							let myPlacemark1868 = new ymaps.Placemark([55.725936764933,37.611032853674], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelnya-imeni-stepana-alekseevicha-i-anny-pavlovny-tarasovykh/'
+							});
+							myPlacemark1868.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1868);
+							let myPlacemark1870 = new ymaps.Placemark([55.726614896718,37.610587074559], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelnya-imeni-alekseya-ivanovicha-i-aleksandry-kirillovny-kolesovykh/'
+							});
+							myPlacemark1870.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1870);
+							let myPlacemark1872 = new ymaps.Placemark([55.773498884472,37.635333660405], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/strannopriimnyy-dom/'
+							});
+							myPlacemark1872.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1872);
+							let myPlacemark1874 = new ymaps.Placemark([55.745322780106,37.665059292093], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/093/093c483004c356767dbf66e1bb4fc7bd.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/dom-besplatnykh-kvartir-im-n-a-i-a-a-mazurinykh/'
+							});
+							myPlacemark1874.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1874);
+							let myPlacemark1875 = new ymaps.Placemark([55.719421266344,37.609939896837], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelnya-moskovskogo-dvoryanstva-imeni-stepana-dmitrievicha-nechaeva/'
+							});
+							myPlacemark1875.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1875);
+							let myPlacemark1877 = new ymaps.Placemark([55.735771770694,37.623989307657], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelnya-imeni-n-v-i-d-a-nemirovykh-kolodkinykh/'
+							});
+							myPlacemark1877.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1877);
+							let myPlacemark1878 = new ymaps.Placemark([55.809433590448,37.655045497057], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/sirotskiy-priyut-imeni-bratev-petra-aleksandra-i-vasiliya-bakhrushinykh/'
+							});
+							myPlacemark1878.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1878);
+							let myPlacemark1879 = new ymaps.Placemark([55.725970164585,37.629364454523], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/bogadelennyy-dom-bratev-solodovnikovykh/'
+							});
+							myPlacemark1879.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1879);
+							let myPlacemark1881 = new ymaps.Placemark([55.737669346312,37.623249199926], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/marfo-mariinskaya-obitel-miloserdiya/'
+							});
+							myPlacemark1881.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1881);
+							let myPlacemark1884 = new ymaps.Placemark([55.744738794829,37.584571563974], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/moskovskiy-ispravitelnyy-priyut-dlya-maloletnikh-prestupnikov/'
+							});
+							myPlacemark1884.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1884);
+							let myPlacemark1886 = new ymaps.Placemark([55.749271418343,37.63615044333], {
+							/*hintContent: 'Собственный значок метки',
+							balloonContent: 'Это красивая метка'*/
+							}, {
+							iconLayout: 'default#image',
+							iconImageHref: '/upload/iblock/a40/a407df6715b99fac9f41c5fa30e149e4.svg',
+							iconImageSize: [50, 62],
+							iconImageOffset: [-5, -38],
+							customParamUrl : '/map/imperatorskiy-vospitatelnyy-dom/'
+							});
+							myPlacemark1886.events.add("click", function (e) {
+							let target = e.get('target');
+							window.location.href = target.options.get('customParamUrl');
+							});
+							projectsMapMainblock.geoObjects.add(myPlacemark1886);
+							});
+						style.
+							.body:not(.index) .main>.container {
+							padding-bottom: 0;
+							}
+
+	+footer()
