@@ -1502,3 +1502,16 @@
 		}
 	}
 }
+
+.page-top--icon-wrap{
+	.svg-print{
+		background: none !important;
+	}
+}
+@media (min-width: 1160px){
+
+	.projects_map__detail__pre_head{
+		padding-left: 75px;
+		padding-right: 75px;
+	}
+}
