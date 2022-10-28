@@ -2,6 +2,7 @@
 $primary: #96BF31;
 $body-color: #2F3338;
 :root {
+	--primary: #{$primary};
 	--animate-delay: 1.2s;
 	--fontSizeBase: #{$em-base};
 	--bs-gutter-x: 	10px;

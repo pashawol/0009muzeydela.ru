@@ -2,7 +2,7 @@
 @import "mixin";
 @import "root";
 
-// $primary
+// var(--primary)
 .roww {
 	@media (min-width: 992px) {
 		display: flex;
@@ -105,7 +105,7 @@
 		padding-bottom: rem(18);
 	}
 	.form-control {
-		border: 1px solid $primary;
+		border: 1px solid var(--primary);
 		font-size: 18px;
 		padding: 6px 10px;
 		@media (min-width: 992px) {
@@ -185,7 +185,7 @@
 	}
 }
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-	color: $primary;
+	color: var(--primary);
 }
 
 .select2-dropdown {
@@ -225,7 +225,7 @@
 		}
 		background-position: 0 center;
 		padding-left: 24px;
-		color: $primary;
+		color: var(--primary);
 		&-inner {
 			position: relative;
 		}
@@ -233,7 +233,7 @@
 			border: 0;
 			width: 6px;
 			height: 6px;
-			background-color: $primary;
+			background-color: var(--primary);
 			border-radius: 50%;
 			top: rem(2);
 			left: rem(-10);
@@ -256,7 +256,7 @@
 		position: relative;
 		&::before {
 			content: "";
-			@include triangle(8px, $primary, down);
+			@include triangle(8px, var(--primary), down);
 			margin-left: 10px;
 			order: 2;
 			position: relative;
@@ -331,11 +331,11 @@
 		border-radius: 3px;
 		@include ellips;
 		&:hover {
-			border-color: $primary;
+			border-color: var(--primary);
 		}
 	}
 	&__input:checked ~ &__text {
-		background-color: $primary;
+		background-color: var(--primary);
 		color: #ffffff;
 	}
 }
@@ -413,7 +413,7 @@
 		line-height: 1.4;
 		&.active {
 			background: rgba(150, 191, 49, 0.15);
-			color: $primary;
+			color: var(--primary);
 		}
 	}
 	.btn-outline-primary {
@@ -473,15 +473,15 @@
 }
 
 .btn-outline-primary {
-	border-color: $primary;
+	border-color: var(--primary);
 	// width: 100%;
-	color: $primary;
+	color: var(--primary);
 	background: transparent;
 	@include mt;
 	margin-top: 60px;
 	margin-bottom: 20px;
 	&:hover {
-		background-color: $primary;
+		background-color: var(--primary);
 	}
 }
 .catalog-block-pagination {
@@ -963,8 +963,8 @@
 	align-items: center;
 	justify-content: center;
 	&.active{
-		background-color: $primary;
-		border-color: $primary;
+		background-color: var(--primary);
+		border-color: var(--primary);
 	}
 	&:not(:hover){
 		color: #fff;
@@ -1006,7 +1006,7 @@
 	@include mt;
 	color: #fff;
 	&:hover{
-		color: $primary;
+		color: var(--primary);
 	}
 }
 .projects_map__head__col2{
@@ -1037,15 +1037,15 @@
 
 .btn.btn-transparent{
 	&:not(:hover) {
-		border-color:$primary;
+		border-color:var(--primary);
 	}
 }
 
 .projects_map_popup__btn{
-	border-color: $primary;
+	border-color: var(--primary);
 	&:hover{
-		background-color: $primary;
-		border-color: $primary;
+		background-color: var(--primary);
+		border-color: var(--primary);
 	}
 }
 .col-place{
@@ -1169,7 +1169,7 @@
 .btn-more{
 	position: absolute;
 	left: 0;
-	bottom: calc(env(safe-area-inset-bottom,0) + 0);
+	bottom: env(safe-area-inset-bottom,0);
 	width: 100%;
 	border-radius: 0;
 	z-index: 5;
@@ -1294,7 +1294,7 @@
       color: #2F3338;
     }
     &:hover{
-      color: $primary;
+      color: var(--primary);
     }
   }
 	.projects_map_popup__info__item__pic__text{
@@ -1302,7 +1302,7 @@
 	}
 	.projects_map_popup__info__item__val{
 		&:hover .projects_map_popup__info__item__pic__text{
-			color: $primary !important;
+			color: var(--primary) !important;
 		}
 	}
   &__title{
@@ -1343,7 +1343,7 @@
 			z-index: 4;
 			box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
 			.projects_map_popup__info__item__pic__text{
-				color: $primary;
+				color: var(--primary);
 			}
 		}
 

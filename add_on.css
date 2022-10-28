@@ -3741,12 +3741,16 @@ a.warn_infobaner_second__btn_btn:hover{
 		padding-right: 16px;
 	}
 }
+.cs_map_page_body_no_master_site {
+	/* height: 100vh; */
+}
 .cs_map_page_body_no_master_site .body {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	min-height: 1vh !important;
 	width: 100%;
+	
 }
 .projects_map__holder{
 	/*display: none;*/
