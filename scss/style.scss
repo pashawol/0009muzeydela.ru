@@ -1169,7 +1169,7 @@
 .btn-more{
 	position: absolute;
 	left: 0;
-	bottom: env(safe-area-inset-bottom,0);
+	bottom: calc(env(safe-area-inset-bottom,0) + env(safe-area-inset-top,0));
 	width: 100%;
 	border-radius: 0;
 	z-index: 5;
@@ -1184,7 +1184,7 @@
 .projects_map_popup__content{
 	overflow-y: auto;
 	position: relative;
-	padding-bottom: calc(env(safe-area-inset-bottom,0) + 45px);
+	padding-bottom: calc(env(safe-area-inset-bottom,0)  + env(safe-area-inset-top,0) + 45px);
 }
 
 
