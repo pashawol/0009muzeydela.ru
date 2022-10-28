@@ -1253,16 +1253,15 @@
     margin-bottom: 8px;
   }
 }
+.pprojects_map_popup {
+  display: flex;
+  flex-direction: column;
+}
+
 .btn-more {
-  position: absolute;
-  left: 0;
-  bottom: calc(env(safe-area-inset-bottom, 0) + env(safe-area-inset-top, 0));
   width: 100%;
+  display: block !important;
   border-radius: 0;
-  z-index: 5;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
 }
 .btn-more:not(:hover) {
   background: #2F3338;

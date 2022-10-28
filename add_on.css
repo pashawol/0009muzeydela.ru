@@ -2570,7 +2570,9 @@ a.warn_infobaner_second__btn_btn:hover{
 
 
 .projects_map_popup__content{
-	height: 100%;
+	/* height: 100%; */
+	flex-grow: 1;
+	max-height: calc(100% - 45px);
 	background: #2F3338;
 }
 .projects_map_popup__close{
