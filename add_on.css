@@ -2533,6 +2533,8 @@ a.warn_infobaner_second__btn_btn:hover{
 	/*height: calc(100vh - 190px);*/
 	height: 100%;
 	background: #2F3338;
+	display: flex;
+	flex-direction: column;
 }
 
 .projects_map_popup::-webkit-scrollbar-button {
