@@ -1522,45 +1522,4 @@
 		padding-left: 75px;
 		padding-right: 75px;
 	}
-}
-
-.cs_map_page_body_no_master_site .body {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	min-height: 1vh !important;
-	width: 100%;
-}
-.projects_map__holder{
-	/*display: none;*/
-}
-
-.cs_map_page_body_no_master_site .body  .main ,
-.cs_map_page_body_no_master_site .body  .main > .container > .row > .content-md,
-.cs_map_page_body_no_master_site .body  .main > .container > .row,
-.cs_map_page_body_no_master_site .body  .main > .container{
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-}
-.cs_map_page_body_no_master_site #js_map_list_result{
-	flex-grow: 1;
-	margin-bottom: env(safe-area-inset-bottom);
-	position: relative;
-}
-.cs_map_page_body_no_master_site .projects_map__mainblock{
-	height: 100% !important;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-}
-
-.cs_map_page_body_no_master_site .ymaps-2-1-79-map{
-	height: 100% !important;
-}
-.cs_map_page_body_no_master_site{
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-}
+} 

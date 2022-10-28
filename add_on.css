@@ -3745,6 +3745,7 @@ a.warn_infobaner_second__btn_btn:hover{
 }
 .cs_map_page_body_no_master_site {
 	/* height: 100vh; */
+	
 }
 .cs_map_page_body_no_master_site .body {
 	display: flex;
@@ -3768,7 +3769,8 @@ a.warn_infobaner_second__btn_btn:hover{
 }
 .cs_map_page_body_no_master_site #js_map_list_result{
 	flex-grow: 1;
-	margin-bottom: calc(env(safe-area-inset-bottom,0) + env(safe-area-inset-top,0));
+	/* max-height: ; */
+	
 	position: relative;
 }
 .cs_map_page_body_no_master_site .projects_map__mainblock{
@@ -3786,6 +3788,7 @@ a.warn_infobaner_second__btn_btn:hover{
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
+	height: calc(100vh - env(safe-area-inset-bottom,0) - env(safe-area-inset-top,0));
 }
 
 element.style {
