@@ -3791,6 +3791,7 @@ a.warn_infobaner_second__btn_btn:hover{
 	flex-direction: column;
 	height: 100vh;
 	height: calc(100vh - env(safe-area-inset-bottom,0) - env(safe-area-inset-top,0));
+	height: calc(var(--vh) * 100);
 }
 
 element.style {
